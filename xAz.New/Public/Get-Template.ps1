@@ -5,7 +5,8 @@ function Get-Template {
 
     .DESCRIPTION
     Returns the link to the modules template
-    Can be configured in Modulemanifest (Az.New.psd1)  Attribute FileList = @('./static/template.json')
+    Can be configured in Modulemanifest (Az.New.psd1)  
+    Attribute FileList = @('./static/template.json')
 
     .EXAMPLE
     Get-NewTemplate
@@ -24,7 +25,7 @@ function Get-Template {
     process {
         $moduleFileList = $Local:MyInvocation.MyCommand.Module.FileList
         $TemplateUri = $moduleFileList[0]
-        Write-Verbose -Message ($script:localizedData.RetrievingFolderInformation -f $TemplateUri)
+        Write-Verbose -Message ($script:localizedData.RetrievingFolderInformation -f $moduleFileList)
         $TemplateUri
     }
 

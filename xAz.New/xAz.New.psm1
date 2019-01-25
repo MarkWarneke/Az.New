@@ -8,8 +8,7 @@ Write-Verbose $PSScriptRoot
 
 <#
     Load Common Helper
-
-    # https://github.com/PowerShell/DscResources/blob/master/StyleGuidelines.md#localization
+    https://github.com/PowerShell/DscResources/blob/master/StyleGuidelines.md#localization
 #>
 
 Import-Module -Name (Join-Path -Path $PSScriptRoot -ChildPath 'CommonResourceHelper.psm1')

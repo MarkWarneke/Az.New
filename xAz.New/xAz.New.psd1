@@ -12,25 +12,25 @@
 RootModule = 'xAz.New.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+    ModuleVersion = '0.0.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '2cf70f98-b55c-4ed1-ad6e-f3546062dc4b'
+    GUID = '2cf70f98-b55c-4ed1-ad6e-f3546062dc4b'
 
 # Author of this module
-Author = 'Mark Warneke <mark.warneke@gmail.com>'
+    Author = 'Mark Warneke <mark.warneke@gmail.com>'
 
 # Company or vendor of this module
-CompanyName = 'Mark Warneke'
+    CompanyName = 'Mark Warneke'
 
 # Copyright statement for this module
-    Copyright        = 'MIT LIcense Copyright (c) 2019 Mark <https://github.com/mark-mit-k/Az.New/blob/master/LICENSE>'
+    Copyright = 'MIT LIcense Copyright (c) 2019 Mark <https://github.com/mark-mit-k/Az.New/blob/master/LICENSE>'
 
 # Description of the functionality provided by this module
-Description = 'Framework for Azure Resource Manager Deployments based on ARM-Templates) Infrastructure as code. PowerShell Core'
+    Description = 'Framework for Azure Resource Manager Deployments based on ARM-Templates) Infrastructure as code. PowerShell Core'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -69,16 +69,16 @@ Description = 'Framework for Azure Resource Manager Deployments based on ARM-Tem
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = '*'
+    FunctionsToExport = '*'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = '*'
+    CmdletsToExport = '*'
 
 # Variables to export from this module
-VariablesToExport = '*'
+    VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = '*'
+    AliasesToExport = '*'
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
@@ -87,7 +87,7 @@ AliasesToExport = '*'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('./static/template.json')
+    FileList = @('./static/template.json')
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
@@ -117,7 +117,7 @@ PrivateData = @{
     HelpInfoURI      = 'https://github.com/mark-mit-k/Az.New/blob/master/Az.New/docs/'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-DefaultCommandPrefix = 'xAz'
+    DefaultCommandPrefix = 'xAz'
 
 }
 

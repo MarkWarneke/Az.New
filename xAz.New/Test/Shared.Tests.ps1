@@ -1,6 +1,6 @@
 # Dot source this script in any Pester test script that requires the module to be imported.
 
-$ModuleManifestName = 'Az.New.psd1'
+$ModuleManifestName = 'xAz.New.psd1'
 $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
 
 if (!$SuppressImportModule) {

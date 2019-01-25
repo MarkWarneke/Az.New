@@ -8,7 +8,7 @@ else {
     #install PSScriptAnalyzer
     Install-Package PSScriptAnalyzer -Force -Scope CurrentUser
 }
-$script:ModuleName = 'Az.New'
+$script:ModuleName = 'xAz.New'
 # Removes all versions of the module from the session before importing
 Get-Module $ModuleName | Remove-Module
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
