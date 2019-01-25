@@ -5,7 +5,7 @@ function Get-Template {
 
     .DESCRIPTION
     Returns the link to the modules template
-    Can be configured in Modulemanifest (Az.New.psd1)  
+    Can be configured in Modulemanifest (Az.New.psd1)
     Attribute FileList = @('./static/template.json')
 
     .EXAMPLE

@@ -28,12 +28,12 @@ ForEach ($folder in $functionFolders) {
     If (Test-Path -Path $folderPath) {
 
         Write-Verbose -Message "Importing from $folder"
-        $functions = Get-ChildItem -Path $folderPath -Filter '*.ps1' 
+        $functions = Get-ChildItem -Path $folderPath -Filter '*.ps1'
         ForEach ($function in $functions) {
             Write-Verbose -Message "Importing $($function.BaseName)"
             . $($function.FullName)
         }
-    }    
+    }
 }
 
 $publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\Public" -Filter '*.ps1').BaseName
