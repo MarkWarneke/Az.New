@@ -1,0 +1,5 @@
+*.zip
+Release/
+examples/Out/*
+test/Out/*
+test/TemplateRootTemp/*
