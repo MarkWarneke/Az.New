@@ -1,4 +1,4 @@
-function Get-ArmTemplate {
+function Get-Template {
     <#
     .SYNOPSIS
     Returns the link to the modules ARM template

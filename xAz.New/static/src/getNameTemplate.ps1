@@ -21,7 +21,7 @@ function Get-Name {
     #>
 
     [CmdletBinding(
-        PositionalBinding = $True,
+        PositionalBinding = $True
     )]
     [OutputType([String])]
     param(

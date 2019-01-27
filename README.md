@@ -21,40 +21,39 @@ $input = @{
 $Module = New-xAzModule @Input
 
 <#
-    Directory: C:\temp\xAzKVKeyVault
+    Directory: C:\temp\xAz.KeyVault
 
-
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
-d-----       27.01.2019     14:36                .vscode
-d-----       27.01.2019     14:36                Classes
-d-----       27.01.2019     14:36                docs
-d-----       27.01.2019     14:36                Localization
-d-----       27.01.2019     14:36                Private
-d-----       27.01.2019     14:36                Public
-d-----       27.01.2019     14:36                Static
-d-----       27.01.2019     14:36                Test
--a----       27.01.2019     14:36           7670 CommonResourceHelper.psm1
--a----       27.01.2019     14:36             13 KeyVaultSecrets.psd1
--a----       27.01.2019     14:36           3987 xAzKVKeyVault.psd1
--a----       27.01.2019     14:27           1282 xAzKVKeyVault.psm1
+    Mode                LastWriteTime         Length Name
+    ----                -------------         ------ ----
+    d-----       27.01.2019     15:51                .vscode
+    d-----       27.01.2019     15:51                Classes
+    d-----       27.01.2019     15:51                docs
+    d-----       27.01.2019     15:51                Localization
+    d-----       27.01.2019     15:51                Private
+    d-----       27.01.2019     15:51                Public
+    d-----       27.01.2019     15:51                Static
+    d-----       27.01.2019     15:51                Test
+    -a----       27.01.2019     15:51           7670 CommonResourceHelper.psm1
+    -a----       27.01.2019     15:51             13 KeyVaultSecrets.psd1
+    -a----       27.01.2019     15:51           3908 xAz.KeyVault.psd1
+    -a----       27.01.2019     14:27           1282 xAz.KeyVault.psm1
 #>
 
-Import-Module C:\temp\xAzKVKeyVault
-Get-Command -Module xAzKVKeyVault
+Import-Module C:\temp\xAz.KeyVault\xAz.KeyVault.psd1
+Get-Command -Module xAz.KeyVault
 
 <#
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Function        Get-Name                                           0.0.1      xAzKVKeyVault
-Function        Get-Secret                                         0.0.1      xAzKVKeyVault
-Function        Get-Template                                       0.0.1      xAzKVKeyVault
-Function        New-Deployment                                     0.0.1      xAzKVKeyVault
+    CommandType     Name                                               Version    Source
+    -----------     ----                                               -------    ------
+    Function        Get-xAzKVName                                      0.0.1      xAz.KeyVault
+    Function        Get-xAzKVSecret                                    0.0.1      xAz.KeyVault
+    Function        Get-xAzKVTemplate                                  0.0.1      xAz.KeyVault
+    Function        New-xAzKVDeployment                                0.0.1      xAz.KeyVault
 #>
 
 # Edit the functions
-# $Name = Get-xAzKVKeyVaultName -Environment p
-# New-xAzKVKeyVaultDeployment -ResourceName $Name
+$Name = Get-xAzKVName -Environment p
+New-xAzKVDeployment -ResourceName $Name
 ```
 
 ## Introduction

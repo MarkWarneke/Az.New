@@ -20,11 +20,14 @@ function New-Module {
         [string] $CompanyName,
 
         [Parameter()]
-        [string] $AuthorName = $env:USERNAME
+        [string] $AuthorName = $env:USERNAME,
+
+        [Parameter()]
+        [string] $Prefix = "xAz."
     )
 
     $TemplatePath = Get-xAzManifest
-    $NewModuleName = "{0}{1}" -f $DefaultCommandPrefix, $ModuleName
+    $NewModuleName = "{0}{1}" -f $Prefix, $ModuleName
     $DestinationPath = (Join-Path $Path $NewModuleName)  # Must be named exactly like ModuleName for tests
 
     $plaster = @{
@@ -42,9 +45,16 @@ function New-Module {
         $DestinationPath = $psCmdlet.SessionState.Path.GetUnresolvedProviderPathFromPSPath($DestinationPath)
         $TemplateDirectory = Split-Path $TemplatePath -Parent
 
-        if ($pscmdlet.ShouldProcess($DestinationPath, 'Operation')) {
+        if ($pscmdlet.ShouldProcess($DestinationPath, 'Invoke-Plaster')) {
+            Write-Verbose -Message "[$(Get-Date)] Create folder"
             New-Item -ItemType Directory -Path $DestinationPath
-            Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -PassThru
+            Write-Verbose -Message "[$(Get-Date)] Generate Module"
+            $plaster = Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -PassThru
+
+            $GeneratedModuleManifestFile = Get-ChildItem -Path $DestinationPath -Name "$NewModuleName.psd1" -ErrorAction Stop
+            $null = Update-Manifest -Path $GeneratedModuleManifestFile.PSPath -DefaultCommandPrefix $DefaultCommandPrefix
+
+            $plaster
         }
     }
     else {

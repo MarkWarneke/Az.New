@@ -17,76 +17,117 @@ $Env:ModuleBase = $ModuleBase
 Import-Module $ModuleBase\$ModuleName.psd1 -PassThru -ErrorAction Stop | Out-Null
 Describe "New-Module function unit tests" -Tags Build , Unit {
 
-
+    $ModuleName = 'KeyVault'
+    $DefaultCommandPrefix = 'xAzKV'
     $input = @{
-        ModuleName           = 'KeyVault'
+        ModuleName           = $ModuleName
         ModuleDescription    = 'Function to deploy KeyVault'
         Path                 = "$TestDrive"
-        DefaultCommandPrefix = "xAzKV"
+        DefaultCommandPrefix = $DefaultCommandPrefix
         EMail                = "mark.warneke@gmail.com"
         CompanyName          = "Microsoft"
         AuthorName           = "Mark"
     }
-    New-xAzModule @input -Verbose -ErrorVariable $E
+    $Module = New-xAzModule @input -Verbose -ErrorVariable $E
 
     it "should not throw an error" {
         $E | Should -BeNullOrEmpty
     }
 
-    $item = Get-ChildItem $TestDrive -Recurse
+    context "Module scaffolding" {
+        $item = Get-ChildItem $TestDrive -Recurse
 
-    $TestCase = @(
-        @{
-            Position = 0
-            Expected = "{0}{1}" -f $input.DefaultCommandPrefix, $input.ModuleName
-        },
-        @{
-            Position = 1
-            Expected = ".vscode"
-        },
-        @{
-            Position = 2
-            Expected = "Classes"
-        },
-        @{
-            Position = 3
-            Expected = "docs"
-        },
-        @{
-            Position = 4
-            Expected = "Private"
-        },
-        @{
-            Position = 5
-            Expected = "Public"
-        },
-        @{
-            Position = 6
-            Expected = "Static"
-        },
-        @{
-            Position = 7
-            Expected = "Test"
-        },
-        @{
-            Position = 9
-            Expected = "{0}{1}{2}" -f $input.DefaultCommandPrefix, $input.ModuleName, ".psd1"
-        },
-        @{
-            Position = 10
-            Expected = "{0}{1}{2}" -f $input.DefaultCommandPrefix, $input.ModuleName, ".psm1"
-        }
-    )
-
-    it "should create <Expected>" -TestCases $TestCase {
-        param(
-            $Position,
-            $Expected
+        $TestCase = @(
+            @{
+                Position = 0
+                Expected = $ModuleName
+            },
+            @{
+                Position = 1
+                Expected = ".vscode"
+            },
+            @{
+                Position = 2
+                Expected = "Classes"
+            },
+            @{
+                Position = 3
+                Expected = "docs"
+            },
+            @{
+                Position = 4
+                Expected = "Localization"
+            },
+            @{
+                Position = 5
+                Expected = "Private"
+            },
+            @{
+                Position = 6
+                Expected = "Public"
+            },
+            @{
+                Position = 7
+                Expected = "Static"
+            },
+            @{
+                Position = 8
+                Expected = "Test"
+            },
+            @{
+                Position = 9
+                Expected = "CommonResourceHelper"
+            },
+            @{
+                Position = 10
+                Expected = "KeyVaultSecrets.psd1"
+            },
+            @{
+                Position = 11
+                Expected = "{0}{1}" -f $ModuleName, ".psd1"
+            },
+            @{
+                Position = 12
+                Expected = "{0}{1}" -f $ModuleName, ".psm1"
+            }
         )
 
-        $item[$Position] | Should Be $Expected
+        it "should create <Expected>" -TestCases $TestCase {
+            param(
+                $Position,
+                $Expected
+            )
+
+            $item[$Position] | Should -Match $Expected
+        }
     }
 
+    context "Manifest manipulation tests" {
+        $ManifestName = "{0}{1}{2}" -f "xAz.", $ModuleName, ".psd1"
+        $Manifest = Get-Content (Join-Path -Path $Module.DestinationPath -ChildPath $ManifestName)
 
+        $TestCaseManifest = @(
+            @{
+                Position = 119
+                Expected = "DefaultCommandPrefix = '$DefaultCommandPrefix'"
+            },
+            @{
+                Position = 89
+                Expected = "FileList = @('./Static/azuredeploy.json')"
+            }<#,
+            @{
+                Position = 53
+                Expected = "RequiredModules = @('Az')"
+            }#>
+        )
+        it "should update Manifest $ManifestName on Position <Position>" -TestCases $TestCaseManifest {
+            param (
+                $Position,
+                $Expected
+            )
+
+            $Manifest[$Position] | Should -Be $Expected
+        }
+    }
 
 }

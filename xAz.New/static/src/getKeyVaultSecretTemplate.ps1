@@ -1,4 +1,4 @@
-function Get-KeyVaultSecret {
+function Get-Secret {
     <#
     .SYNOPSIS
     Returns the used KeyVault secrets
