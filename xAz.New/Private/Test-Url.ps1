@@ -18,7 +18,7 @@ function Test-Url {
     #>
 
     [CmdletBinding()]
-
+    [Outputtype([bool])]
     param (
         [Parameter(Mandatory = $true)]
         [String] $Url

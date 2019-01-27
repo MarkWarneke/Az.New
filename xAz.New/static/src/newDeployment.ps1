@@ -1,4 +1,4 @@
-#REQUIRES -Version 5.0
+﻿#REQUIRES -Version 5.0
 #REQUIRES #-Modules
 #REQUIRES #-RunAsAdministrator
 
@@ -88,7 +88,7 @@ function New-Deployment {
         Write-Verbose "[$(Get-Date)] ResourceGroup $($ResourceGroup.ResourceGroupName)"
 
         $TemplateParameterObject = @{
-            Name              = $ResourceName
+            Name = $ResourceName
         }
 
         try {

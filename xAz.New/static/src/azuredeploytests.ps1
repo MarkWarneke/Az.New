@@ -9,8 +9,8 @@ Describe "should be valid" {
         $text = Get-Content $Path -Raw -ErrorAction Stop
     }
     catch {
-        Write-Host "$($_.Exception) found"
-        Write-Host "$($_.ScriptStackTrace)"
+        Write-Verbose "$($_.Exception) found"
+        Write-Verbose "$($_.ScriptStackTrace)"
         break
     }
 

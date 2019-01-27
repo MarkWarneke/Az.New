@@ -6,7 +6,7 @@ function Update-Manifest {
     )
 
     begin {
-        $RequiredModuleSetting = "RequiredModules = @('Az')"
+        # $RequiredModuleSetting = "RequiredModules = @('Az')"
         $FileListSetting = "FileList = @('./Static/azuredeploy.json')"
         $DefaultCommandPrefixSetting = "DefaultCommandPrefix = '{0}'" -f $DefaultCommandPrefix
     }

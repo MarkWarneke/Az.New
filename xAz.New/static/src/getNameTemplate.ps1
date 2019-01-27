@@ -66,6 +66,7 @@ function Get-Name {
 }
 
 function Remove-Delimiter {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "", Justification = "Does not change state")]
     [CmdletBinding()]
     param (
         $ComponentName,

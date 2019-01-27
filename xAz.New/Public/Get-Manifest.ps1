@@ -5,30 +5,24 @@ function Get-Manifest {
 
     .DESCRIPTION
     Returns the link to the modules template
-    Can be configured in Modulemanifest (Az.New.psd1)
-    Attribute FileList = @('./static/template.json')
+    Can be configured in Modulemanifest (xAz.New.psd1)
+    Attribute FileList = @('./static/PlasterManifest.xml')
 
     .EXAMPLE
-    Get-NewTemplate
+    Get-xAzManifest
 
-    .\Az.New\static\template.json
+    .\Az.New\static\PlasterManifest.xml
 
     #>
     [CmdletBinding()]
-    param (
-
-    )
+    param ()
 
     begin {
-    }
-
-    process {
         $moduleFileList = $Local:MyInvocation.MyCommand.Module.FileList
         $TemplateUri = $moduleFileList[0]
+    }
+    process {
         Write-Verbose -Message ($script:localizedData.RetrievingFolderInformation -f $moduleFileList)
         $TemplateUri
-    }
-
-    end {
     }
 }

@@ -1,5 +1,5 @@
 function Update-Template {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [string] $TemplateUri,
         [string] $Path
@@ -18,12 +18,16 @@ function Update-Template {
                 Write-Verbose "[$(Get-Date)] Download File from $TemplateUri"
                 $Template = Invoke-WebRequest -Method Get -Uri $TemplateUri -ErrorAction Stop
 
-                Write-Verbose "[$(Get-Date)] Replace generated $ExistingTemplate with $TemplateUri"
-                Set-Content -Path $ExistingTemplate -Value $Template -Force -PassThru
+                if ($PSCmdlet.ShouldProcess($ExistingTemplate, $TemplateUri)) {
+                    Write-Verbose "[$(Get-Date)] Replace generated $ExistingTemplate with $TemplateUri"
+                    Set-Content -Path $ExistingTemplate -Value $Template -Force -PassThru
+                }
             }
             else {
-                Write-Verbose "[$(Get-Date)] Replace generated $ExistingTemplate with $TemplateUri"
-                Move-Item $TemplateUri $ExistingTemplate -Force -PassThru
+                if ($PSCmdlet.ShouldProcess($ExistingTemplate, $TemplateUri)) {
+                    Write-Verbose "[$(Get-Date)] Replace generated $ExistingTemplate with $TemplateUri"
+                    Move-Item $TemplateUri $ExistingTemplate -Force -PassThru
+                }
             }
         }
         else {
