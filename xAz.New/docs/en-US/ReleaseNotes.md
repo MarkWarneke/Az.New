@@ -1,2 +1,30 @@
-# Release:  Az.New 0.1.0
- 
+# Release:  Az.New 0.0.1
+
+- Adds Get-xAzManifest
+- Adds New-xAzModule
+- Adds PlasterManifest
+- Adds src
+  - template function
+  - name function
+  - deploy function
+  - module bootstrap function
+  - Folder docs
+    - about
+    - install
+    - introduciton
+    - release
+    - reademe
+  - Folder template
+    - azuredeploy
+    - parameter
+    - metadata
+    - static test
+  - Folder test
+    - Help
+    - Project
+    - Module
+    - Exception
+  - Folder VSCode
+    - extensions
+    - settings
+    - task
