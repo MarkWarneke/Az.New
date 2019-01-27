@@ -43,6 +43,7 @@
 
                 <message> Creating function: PLASTER_PARAM_FunctionName and tests for module: $PLASTER_PARAM_ModuleName </message>
                 <templateFile source='src\KeyVaultSecrets.psd1' destination='KeyVaultSecrets.psd1'/>
+                <templateFile source='src\CommonResourceHelper.psm1' destination='CommonResourceHelper.psm1'/>
                 <templateFile source='src\getNameTemplate.ps1' destination='Public\Get-Name.ps1'/>
                 <templateFile source='src\getArmTemplate.ps1' destination='Public\Get-Template.ps1'/>
                 <templateFile source='src\getKeyVaultSecretTemplate.ps1' destination='Public\Get-Secret.ps1'/>

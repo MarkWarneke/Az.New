@@ -44,7 +44,7 @@ function New-Module {
 
         if ($pscmdlet.ShouldProcess($DestinationPath, 'Operation')) {
             New-Item -ItemType Directory -Path $DestinationPath
-            Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -Verbose
+            Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -PassThru
         }
     }
     else {
