@@ -4,18 +4,17 @@ Framework for Azure Resource Manager Deployments based on ARM-Templates) Infrast
 
 ## Introduction
 
-- [Introduction Docs](xAz.New\docs\en-US\Introduction)
-- [Documentation](xAz.New\docs\en-US)
-- [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
+- [Documentation](xAz.New/docs/en-US)
 - [Examples](Examples)
+- [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
 
 ## Installation
 
-[Installation Docs](xAz.New\docs\en-US\InstallNotes)
+[Installation Docs](xAz.New/docs/en-US/InstallNotes.md)
 
 ## Release
 
-[Release Notes](xAz.New\docs\en-US\ReleaseNotes)
+[Release Notes](xAz.New/docs/en-US/ReleaseNotes.md)
 
 ## Dependencies
 

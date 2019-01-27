@@ -1,7 +1,7 @@
 # Documentation
 
-[Introduction](Introduction)
-[InstallNotes](InstallNotes)
-[ReleaseNotes](ReleaseNotes)
-[Get-xAzManifest](Get-xAzManifest)
-[New-xAzModule](New-xAzModule)
+- [Introduction](Introduction.md)
+- [InstallNotes](InstallNotes.md)
+- [ReleaseNotes](ReleaseNotes.md)
+- [Get-xAzManifest](Get-xAzManifest.md)
+- [New-xAzModule](New-xAzModule.md)
