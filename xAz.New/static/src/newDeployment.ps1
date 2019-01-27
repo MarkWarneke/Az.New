@@ -58,12 +58,17 @@ function New-Deployment {
 
         [Parameter(
             Mandatory,
-            Position = 3,
+            Position = 2,
             HelpMessage = "Enter name of Azure location - e.g. WestEurope"
         )]
         [ValidateScript( { (Get-AzureRmLocation).Location -contains $_ } )]
         [Alias("Loc")]
-        [string] $Location
+        [string] $Location,
+
+        [Parameter(
+            HelpMessage = "Inline parameter to pass to deployment"
+        )]
+        $DeploymentParameter
     )
 
     begin {
@@ -84,14 +89,13 @@ function New-Deployment {
 
         $TemplateParameterObject = @{
             Name              = $ResourceName
-            ResourceGroupName = $ResourceGroupName
         }
 
         try {
 
             if ($PSCmdlet.ShouldProcess($ResourceGroupName, $ComponentName)) {
 
-                $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject -ErrorVariable ErrorMessages
+                $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject @DeploymentParameter -ErrorVariable ErrorMessages
 
                 if ($ErrorMessages) {
                     Write-Output '', 'Template deployment returned the following errors:', @(@($ErrorMessages) | ForEach-Object { $_.Exception.Message.TrimEnd("`r`n") })

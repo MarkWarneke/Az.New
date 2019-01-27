@@ -9,13 +9,14 @@ Import-Module (Join-Path -Path (Split-Path $PSScriptRoot -Parent) -ChildPath "xA
 
 # Specify parameters
 $input = @{
-    ModuleName           = 'KeyVault'
-    ModuleDescription    = 'Function to deploy KeyVault'
+    ModuleName           = 'Cosmos'
+    ModuleDescription    = 'Function to deploy Cosmos Db'
     Path                 = $Path
-    DefaultCommandPrefix = "xAzKV"
+    DefaultCommandPrefix = "xAzCosmos"
     EMail                = "mark.warneke@gmail.com"
     CompanyName          = "Microsoft"
     AuthorName           = "Mark"
+    TemplateUri          = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-cosmosdb-create-arm-template/azuredeploy.json"
 }
 # Create new module
 $Module = New-xAzModule @Input

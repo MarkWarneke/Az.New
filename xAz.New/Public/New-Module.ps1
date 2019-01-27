@@ -23,6 +23,9 @@ function New-Module {
         [string] $AuthorName = $env:USERNAME,
 
         [Parameter()]
+        [string] $TemplateUri,
+
+        [Parameter()]
         [string] $Prefix = "xAz."
     )
 
@@ -53,6 +56,9 @@ function New-Module {
 
             $GeneratedModuleManifestFile = Get-ChildItem -Path $DestinationPath -Name "$NewModuleName.psd1" -ErrorAction Stop
             $null = Update-Manifest -Path $GeneratedModuleManifestFile.PSPath -DefaultCommandPrefix $DefaultCommandPrefix
+
+
+            $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
 
             $plaster
         }
