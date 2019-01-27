@@ -1,5 +1,10 @@
 # Release
 
+## Az.New 0.0.3
+
+- Adds custom ARM template parameter
+- Adds CosmosDb example
+
 ## Az.New 0.0.2
 
 - Adds Localization
