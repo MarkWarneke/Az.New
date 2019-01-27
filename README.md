@@ -85,5 +85,5 @@ This is a personal repository by [mark-mit-k](https://github.com/mark-mit-k). Mi
 
 ## Contact
 
-twitter: [@mark_mit_k_](https://twitter.com/mark_mit_k_)
-github: [mark-mit-k](https://github.com/mark-mit-k)
+- twitter: [@mark_mit_k_](https://twitter.com/mark_mit_k_)
+- github: [mark-mit-k](https://github.com/mark-mit-k)
