@@ -58,14 +58,13 @@ $Name = Get-xAzKVName -Environment p
 New-xAzKVDeployment -ResourceName $Name
 ```
 
-## Introduction
+## Documentation
 
 - [Documentation](xAz.New/docs/en-US)
 - [Examples](Examples)
-- TBD: [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
-
 - [Installation Notes](xAz.New/docs/en-US/InstallNotes.md)
 - [Release Notes](xAz.New/docs/en-US/ReleaseNotes.md)
+- TBD: [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
 
 ## Dependencies
 
@@ -79,7 +78,7 @@ xAz.New Module
 
 for clean Build additionally [PSake](https://github.com/psake/psake)
 
-## Code of conduct
+## Code of Conduct
 
 This is a personal repository by [mark-mit-k](https://github.com/mark-mit-k). Microsoft is **NOT** maintaining this repository, we stick to the [code of conduct](https://microsoft.github.io/codeofconduct/)
 
