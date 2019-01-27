@@ -27,27 +27,29 @@
                 <file source='src\moduleTemplate.psm1' destination='${PLASTER_PARAM_ModuleName}.psm1'/>
 
 
-                <message> Creating you scaffolding structure for module: $PLASTER_PARAM_ModuleName </message>
+                <message>Scaffolding structure for module: $PLASTER_PARAM_ModuleName </message>
                 <file destination='Public\' source='' />
                 <file destination='Private\' source='' />
                 <file destination='Classes\' source='' />
                 <file destination='Static\' source='' />
 
 
-                <message> Creating Azure Resource Manager template</message>
+                <message>Creating Azure Resource Manager template</message>
                 <file source='src\template\azuredeploy.json' destination='Static\azuredeploy.json'/>
                 <file source='src\template\azuredeployParameter.json' destination='Static\azuredeploy.parameters.json'/>
                 <templateFile source='src\template\metadata.json' destination='Static\metadata.json'/>
                 <file source='src\template\azuredeployTests.ps1' destination='Static\azuredeploy.tests.ps1'/>
 
 
-                <message> Creating function: PLASTER_PARAM_FunctionName and tests for module: $PLASTER_PARAM_ModuleName </message>
+                <message> Creating functions for module: $PLASTER_PARAM_ModuleName </message>
                 <templateFile source='src\KeyVaultSecrets.psd1' destination='KeyVaultSecrets.psd1'/>
                 <templateFile source='src\CommonResourceHelper.psm1' destination='CommonResourceHelper.psm1'/>
                 <templateFile source='src\getNameTemplate.ps1' destination='Public\Get-Name.ps1'/>
                 <templateFile source='src\getArmTemplate.ps1' destination='Public\Get-Template.ps1'/>
                 <templateFile source='src\getKeyVaultSecretTemplate.ps1' destination='Public\Get-Secret.ps1'/>
                 <templateFile source='src\newDeployment.ps1' destination='Public\New-Deployment.ps1'/>
+
+                <message> Creating tests for module: $PLASTER_PARAM_ModuleName </message>
                 <templateFile source='src\testTemplate.ps1' destination='Test\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
                 <templateFile source='src\test\Module.Tests.ps1' destination='Test\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
                 <templateFile source='src\test\Shared.Tests.ps1' destination='Test\Shared.Tests.ps1' />
@@ -55,6 +57,10 @@
                 <templateFile source='src\test\Help.Tests.ps1' destination='Test\Help.Tests.ps1'/>
                 <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Test.Exceptions.txt'/>
 
+                <message> Creating localization file</message>
+                <templateFile source='src\localization\localization.txt' destination='Localization\en-US\localization.strings.psd1'/>
+
+                <message> Creating vscode files</message>
                 <file source='src\VSCode\task_pester.json' destination='.vscode\tasks.json' />
                 <file source='src\VSCode\settings.json' destination='.vscode\settings.json' />
                 <file source='src\VSCode\extensions.json' destination='.vscode\extensions.json' />
@@ -65,7 +71,6 @@
                 <templateFile source='src\docs\ReleaseNotes.md' destination='docs\en-US\ReleaseNotes.md'/>
                 <templateFile source='src\docs\InstallNotes.md' destination='docs\en-US\InstallNotes.md'/>
                 <templateFile source='src\docs\Introduction.md' destination='docs\en-US\Introduction.md'/>
-
 
                 <message> Requires modules </message>
                 <requireModule name="Pester" minimumVersion="3.4.0" message="Without Pester, you will not be able to run the provided Pester test to validate your module manifest file.`nWithout version 3.4.0, VS Code will not display Pester warnings and errors in the Problems panel."/>
