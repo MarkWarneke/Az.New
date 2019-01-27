@@ -45,7 +45,7 @@ function New-Module {
 
     .EXAMPLE
     New-xAzModule -ModuleName "KeyVault" -ModuleDescription "Azure Tool Module to deploy Azure KeyVault" -Path "C:/temp" -DefaultCommandPrefix "xAzKV" -Email "warneke.mark@gmail.com" -CompanyName "microsoft"
-
+    ```
     Directory: C:\temp\xAz.KeyVault
 
     Mode                LastWriteTime         Length Name
@@ -62,15 +62,12 @@ function New-Module {
     -a----       27.01.2019     15:51             13 KeyVaultSecrets.psd1
     -a----       27.01.2019     15:51           3908 xAz.KeyVault.psd1
     -a----       27.01.2019     14:27           1282 xAz.KeyVault.psm1
-
-
-
+    ```
 
     .EXAMPLE
     New-xAzModule -ModuleName 'Cosmos' -ModuleDescription 'Module to deploy Cosmos' -Path $Path -DefaultCommandPrefix = "xAzCosmos" -EMail = "mark.warneke@gmail.com" -CompanyName = "Microsoft" -AuthorName = "Mark" -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-cosmosdb-create-arm-template/azuredeploy.json
 
-    Generates files into $Path
-    Downloads ARM tmeplate from URI
+    Generates files into $Path and downloads ARM template from URI
 
     #>
 
