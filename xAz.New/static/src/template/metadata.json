@@ -1,0 +1,9 @@
+{
+    "$schema": "https://aka.ms/azure-quickstart-templates-metadata-schema#",
+    "type": "Template",
+    "itemDisplayName": "<%= $PLASTER_PARAM_ModuleName %>",
+    "description": "<%= $PLASTER_PARAM_ModuleDescription %>",
+    "summary": "<%= $PLASTER_PARAM_ModuleName %> <%= $PLASTER_PARAM_ModuleDescription %>",
+    "githubUsername": "<%= $PLASTER_PARAM_AuthorName %>",
+    "dateUpdated": "<%= $PLASTER_Date  %>"
+}

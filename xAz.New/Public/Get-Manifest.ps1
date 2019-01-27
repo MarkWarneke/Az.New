@@ -1,4 +1,4 @@
-function Get-Template {
+function Get-Manifest {
     <#
     .SYNOPSIS
     Returns the link to the modules template
