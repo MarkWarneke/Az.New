@@ -64,13 +64,8 @@ New-xAzKVDeployment -ResourceName $Name
 - [Examples](Examples)
 - TBD: [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
 
-## Installation
-
-[Installation Docs](xAz.New/docs/en-US/InstallNotes.md)
-
-## Release
-
-[Release Notes](xAz.New/docs/en-US/ReleaseNotes.md)
+- [Installation Notes](xAz.New/docs/en-US/InstallNotes.md)
+- [Release Notes](xAz.New/docs/en-US/ReleaseNotes.md)
 
 ## Dependencies
 
@@ -83,3 +78,12 @@ xAz.New Module
 ### Build
 
 for clean Build additionally [PSake](https://github.com/psake/psake)
+
+## Code of conduct
+
+This is a personal repository by [mark-mit-k](https://github.com/mark-mit-k). Microsoft is **NOT** maintaining this repository, we stick to the [code of conduct](https://microsoft.github.io/codeofconduct/)
+
+## Contact
+
+twitter: [@mark_mit_k_](https://twitter.com/mark_mit_k_)
+github: [mark-mit-k](https://github.com/mark-mit-k)
