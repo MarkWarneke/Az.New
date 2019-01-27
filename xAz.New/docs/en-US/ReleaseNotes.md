@@ -1,4 +1,10 @@
-# Release:  Az.New 0.0.1
+# Release
+
+## Az.New 0.0.2
+
+- Adds Localization
+
+## Az.New 0.0.1
 
 - Adds Get-xAzManifest
 - Adds New-xAzModule
