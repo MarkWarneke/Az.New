@@ -29,7 +29,7 @@ The scaffolding is based on \`Plaster\`, it generates tests and best practices c
 ```
 New-xAzModule -ModuleName "KeyVault" -ModuleDescription "Azure Tool Module to deploy Azure KeyVault" -Path "C:/temp" -DefaultCommandPrefix "xAzKV" -Email "warneke.mark@gmail.com" -CompanyName "microsoft"
 ```
-
+```
 Directory: C:\temp\xAz.KeyVault
 
 Mode                LastWriteTime         Length Name
@@ -46,6 +46,7 @@ d-----       27.01.2019     15:51                Test
 -a----       27.01.2019     15:51             13 KeyVaultSecrets.psd1
 -a----       27.01.2019     15:51           3908 xAz.KeyVault.psd1
 -a----       27.01.2019     14:27           1282 xAz.KeyVault.psm1
+```
 
 ### EXAMPLE 2
 ```
