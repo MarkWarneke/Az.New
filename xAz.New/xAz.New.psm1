@@ -14,7 +14,7 @@ Write-Verbose $PSScriptRoot
 Import-Module -Name (Join-Path -Path $PSScriptRoot -ChildPath 'CommonResourceHelper.psm1')
 Write-Verbose -Message "Imported CommonResourceHelper.psm1"
 
-$script:localizedData = Get-LocalizedData -ResourceName 'localization' -ScriptRoot
+$script:localizedData = Get-LocalizedData -ResourceName 'localization'
 Write-Verbose -Message "Load localizedData"
 
 <#

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- http://overpoweredshell.com/Working-with-Plaster/ https://www.youtube.com/watch?v=16CYGTKH73U&t=2923s
+ -->
+<plasterManifest schemaVersion="1.0" 
+        xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+        <metadata>
+                <name>xAzNewManifest</name>
+                <id>ab857af6-8b6b-4fbd-9f50-e891447830e6</id>
+                <version>0.0.1</version>
+                <title>xAz New Scaffolding Plaster Template</title>
+                <description>xAz New Scaffolding Plaster Template</description>
+                <author>Mark Warneke mark.warneke@gmail.com</author>
+                <tags></tags>
+        </metadata>
+        <parameters>
+                <parameter name="AuthorName" type="text" prompt="Module author's name" />
+                <parameter name="CompanyName" type="text" prompt="Module company's name" />
+                <parameter name='ModuleName' type='text' prompt='Enter the name of the module'/>
+                <parameter name='ModuleDescription' type='text' prompt='Enter a description of the module (required for publishing to the PowerShell Gallery)'/>
+                <parameter name='Version' type='text' prompt='Enter the version number of the module' default='0.1.0'/>
+                <parameter name='EMail' type='text' prompt='Enter email address' store='text' />
+                <parameter name='Prefix' type='text' prompt='Enter DefaultCommandPrefix' store='text' />
+        </parameters>
+        <content>
+                <message>Scaffolding your PowerShell Module ${PLASTER_PARAM_ModuleName}...</message>
+                <newModuleManifest destination='${PLASTER_PARAM_ModuleName}.psd1' moduleVersion='$PLASTER_PARAM_Version' rootModule='${PLASTER_PARAM_ModuleName}.psm1' author='$PLASTER_PARAM_AuthorName' description='$PLASTER_PARAM_ModuleDesc' companyName='$PLASTER_PARAM_CompanyName' encoding='UTF8-NoBOM' />
+                <file source='src\moduleTemplate.psm1' destination='${PLASTER_PARAM_ModuleName}.psm1'/>
+
+
+                <message> Creating you scaffolding structure for module: $PLASTER_PARAM_ModuleName </message>
+                <file destination='Public\' source='' />
+                <file destination='Private\' source='' />
+                <file destination='Classes\' source='' />
+                <file destination='Static\' source='' />
+
+
+                <message> Creating Azure Resource Manager template</message>
+                <file source='src\template\azuredeploy.json' destination='Static\azuredeploy.json'/>
+                <file source='src\template\azuredeployParameter.json' destination='Static\azuredeploy.parameters.json'/>
+                <templateFile source='src\template\metadata.json' destination='Static\metadata.json'/>
+                <file source='src\template\azuredeployTests.ps1' destination='Static\azuredeploy.tests.ps1'/>
+
+
+                <message> Creating function: PLASTER_PARAM_FunctionName and tests for module: $PLASTER_PARAM_ModuleName </message>
+                <templateFile source='src\KeyVaultSecrets.psd1' destination='KeyVaultSecrets.psd1'/>
+                <templateFile source='src\getNameTemplate.ps1' destination='Public\Get-Name.ps1'/>
+                <templateFile source='src\getArmTemplate.ps1' destination='Public\Get-Template.ps1'/>
+                <templateFile source='src\getKeyVaultSecretTemplate.ps1' destination='Public\Get-Secret.ps1'/>
+                <templateFile source='src\newDeployment.ps1' destination='Public\New-Deployment.ps1'/>
+                <templateFile source='src\testTemplate.ps1' destination='Test\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
+                <templateFile source='src\test\Module.Tests.ps1' destination='Test\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
+                <templateFile source='src\test\Shared.Tests.ps1' destination='Test\Shared.Tests.ps1' />
+                <templateFile source='src\test\Project.Tests.ps1' destination='Test\Project.Tests.ps1'/>
+                <templateFile source='src\test\Help.Tests.ps1' destination='Test\Help.Tests.ps1'/>
+                <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Test.Exceptions.txt'/>
+
+                <file source='src\VSCode\task_pester.json' destination='.vscode\tasks.json' />
+                <file source='src\VSCode\settings.json' destination='.vscode\settings.json' />
+                <file source='src\VSCode\extensions.json' destination='.vscode\extensions.json' />
+
+                <message> Creating help and license files </message>
+                <templateFile source='src\docs\about_Module.help.txt' destination='docs\en-US\about_${PLASTER_PARAM_ModuleName}.help.txt'/>
+                <templateFile source='src\docs\readme.md' destination='docs\en-US\README.md'/>
+                <templateFile source='src\docs\ReleaseNotes.md' destination='docs\en-US\ReleaseNotes.md'/>
+                <templateFile source='src\docs\InstallNotes.md' destination='docs\en-US\InstallNotes.md'/>
+                <templateFile source='src\docs\Introduction.md' destination='docs\en-US\Introduction.md'/>
+
+
+                <message> Requires modules </message>
+                <requireModule name="Pester" minimumVersion="3.4.0" message="Without Pester, you will not be able to run the provided Pester test to validate your module manifest file.`nWithout version 3.4.0, VS Code will not display Pester warnings and errors in the Problems panel."/>
+                <requireModule name="PSScriptAnalyzer" message="Without PSScriptAnalyzer, you will not be able to perform script analysis, or use the provided options to control script analysis."/>
+                <requireModule name="Az" message="Without Az Module you won't be able to deploy Azure Resources"/>
+                <message> Your new PowerShell module project '$PLASTER_PARAM_ModuleName' has been created. </message>
+        </content>
+</plasterManifest>
