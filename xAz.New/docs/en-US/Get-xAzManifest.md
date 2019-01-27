@@ -18,17 +18,17 @@ Get-xAzManifest [<CommonParameters>]
 
 ## DESCRIPTION
 Returns the link to the modules template
-Can be configured in Modulemanifest (Az.New.psd1)
-Attribute FileList = @('./static/template.json')
+Can be configured in Modulemanifest (xAz.New.psd1)
+Attribute FileList = @('./static/PlasterManifest.xml')
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-NewTemplate
+Get-xAzManifest
 ```
 
-.\Az.New\static\template.json
+.\Az.New\static\PlasterManifest.xml
 
 ## PARAMETERS
 

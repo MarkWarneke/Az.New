@@ -8,107 +8,57 @@ schema: 2.0.0
 # New-xAzModule
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Create a PowerShell module in specified path.
 
 ## SYNTAX
 
 ```
 New-xAzModule [-ModuleName] <String> [-ModuleDescription] <String> [-Path] <String>
  [[-DefaultCommandPrefix] <String>] [[-EMail] <String>] [[-CompanyName] <String>] [[-AuthorName] <String>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-TemplateUri] <String>] [[-Prefix] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Create a PowerShell module in specified path.
+It can be used to deploy Azure Resource Manager Templates, if TemplateUri is provided
+The scaffolding is based on \`Plaster\`, it generates tests and best practices checks for Azure Resource Manager Templates.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-xAzModule -ModuleName "KeyVault" -ModuleDescription "Azure Tool Module to deploy Azure KeyVault" -Path "C:/temp" -DefaultCommandPrefix "xAzKV" -Email "warneke.mark@gmail.com" -CompanyName "microsoft"
 ```
 
-{{ Add example description here }}
+Directory: C:\temp\xAz.KeyVault
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       27.01.2019     15:51                .vscode
+d-----       27.01.2019     15:51                Classes
+d-----       27.01.2019     15:51                docs
+d-----       27.01.2019     15:51                Localization
+d-----       27.01.2019     15:51                Private
+d-----       27.01.2019     15:51                Public
+d-----       27.01.2019     15:51                Static
+d-----       27.01.2019     15:51                Test
+-a----       27.01.2019     15:51           7670 CommonResourceHelper.psm1
+-a----       27.01.2019     15:51             13 KeyVaultSecrets.psd1
+-a----       27.01.2019     15:51           3908 xAz.KeyVault.psd1
+-a----       27.01.2019     14:27           1282 xAz.KeyVault.psm1
+
+### EXAMPLE 2
+```
+New-xAzModule -ModuleName 'Cosmos' -ModuleDescription 'Module to deploy Cosmos' -Path $Path -DefaultCommandPrefix = "xAzCosmos" -EMail = "mark.warneke@gmail.com" -CompanyName = "Microsoft" -AuthorName = "Mark" -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-cosmosdb-create-arm-template/azuredeploy.json
+```
+
+Generates files into $Path
+Downloads ARM tmeplate from URI
 
 ## PARAMETERS
 
-### -AuthorName
-{{Fill AuthorName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CompanyName
-{{Fill CompanyName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultCommandPrefix
-{{Fill DefaultCommandPrefix Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EMail
-{{Fill EMail Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ModuleDescription
-{{Fill ModuleDescription Description}}
+### -ModuleName
+Name of the new PowerShell module
 
 ```yaml
 Type: String
@@ -122,23 +72,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ModuleName
-{{Fill ModuleName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{Fill Path Description}}
+### -ModuleDescription
+Description of the new PowerShell module
 
 ```yaml
 Type: String
@@ -152,14 +87,136 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Path
+Location where to generate PowerShell module files and folders
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DefaultCommandPrefix
+DefaultCommandPrefix in PowerShell Manifest file.
+Is used to avoid Namespace.
+The command will be prefixed with the DefaultCommandPrefix.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: XAz
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EMail
+Contact E-Mail Address for Module Manifest
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CompanyName
+Company Name for Module Manifest
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthorName
+Author Name for Manifest, will use local username if empty
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: $env:USERNAME
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TemplateUri
+Uri to an ARM template to be used instead of blank
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Prefix
+Prefix of the module, not the DefaultCommandPrefix.
+Prefix will be prefixed of the module name to avoid Namespace conflicts.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: XAz.
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+Dry run
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompt user confirmation
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -174,11 +231,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
