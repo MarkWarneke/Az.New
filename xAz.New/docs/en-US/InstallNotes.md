@@ -1,30 +1,22 @@
-# Installing Az.New
+# InstallNotes
 
-You can install Az.New
-```PowerShell
-Copy-Item Az.New "$HOME\Documents\WindowsPowerShell\Modules\Az.New"
-Import-Module Az.New
-```
+## Installing xAz.New
 
-
-# Installing Az.New
-
-You can install latest Az.New
+You can install latest xAz.New with cloning the git repository and copying it locally.
 
 ```PowerShell
 git clone  https://github.com/mark-mit-k/Az.New.git --branch master --single-branch [<folder>]
 
-Copy-Item Az.New "$HOME\Documents\WindowsPowerShell\Modules\Az.New"
-Install-Module "$HOME\Documents\WindowsPowerShell\Modules\Az.New"
+Copy-Item "Az.New\xAz.New" "$HOME\Documents\WindowsPowerShell\Modules" -Recurse # Add force to update
 ```
 
-## Import
+## Import and Usage
 
-You can load Az.New
+You can load Az.New without installing, once installed
 
 ``` PowerShell
-Import-Module .\Az.New\Az.New.psd1
-Get-Command -Module Az.New
+Import-Module xAz.New
+Get-Command -Module xAz.New
 ```
 
 ## Build and Test
@@ -32,5 +24,13 @@ Get-Command -Module Az.New
 Run individual tests from folder `.\Az.New\Test`
 
 ```PowerShell
-Invoke-Pester .\Az.New\Test\
+Invoke-Pester .\Az.New
+```
+
+## Uninstall
+
+Depending on your installation you can run
+
+```PowerShell
+Remove-Item $HOME\Documents\WindowsPowerShell\Modules\xAz.New\ -Recurse -Force
 ```
