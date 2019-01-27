@@ -58,7 +58,7 @@
                 <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Test.Exceptions.txt'/>
 
                 <message> Creating localization file</message>
-                <templateFile source='src\localization\localization.txt' destination='Localization\en-US\localization.strings.psd1'/>
+                <templateFile source='src\localization\localization.psd1' destination='Localization\en-US\localization.strings.psd1'/>
 
                 <message> Creating vscode files</message>
                 <file source='src\VSCode\task_pester.json' destination='.vscode\tasks.json' />
