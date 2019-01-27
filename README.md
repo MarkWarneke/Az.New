@@ -6,6 +6,8 @@ The module will create a PowerShell module in specified path.
 It can be used to deploy Azure Resource Manager Templates.
 The scaffolding is based on `Plaster`, it generates tests and best practices checks for Azure Resource Manager Templates.
 
+See [Examples](Examples) e.g. `createBasic.ps1`
+
 ```PowerShell
 # .\Examples\createBasic.ps1
 
@@ -60,7 +62,7 @@ New-xAzKVDeployment -ResourceName $Name
 
 - [Documentation](xAz.New/docs/en-US)
 - [Examples](Examples)
-- [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
+- TBD: [Wiki](https://github.com/mark-mit-k/Az.New/wiki)
 
 ## Installation
 
