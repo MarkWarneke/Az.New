@@ -11,5 +11,6 @@
     // Use a custom PowerShell Script Analyzer settings file for this workspace.
     // Relative paths for this setting are always relative to the workspace root dir.
     "powershell.scriptAnalysis.enable": true,
-    "powershell.codeFormatting.openBraceOnSameLine": true
+    "powershell.codeFormatting.openBraceOnSameLine": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\6\\pwsh.exe"
 }
