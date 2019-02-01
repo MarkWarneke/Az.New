@@ -12,7 +12,16 @@ $script:ModuleName = '<%= $PLASTER_PARAM_ModuleName %>'
 # Removes all versions of the module from the session before importing
 Get-Module $ModuleName | Remove-Module
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
-$FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test.Exceptions.txt"
+
+if ((Split-Path $ModuleBase -Leaf) -eq 'Module') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
+# For tests in .\Tests subdirectory
+if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
+
+$FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test\Module\Test.Exceptions.txt"
 # For tests in .\Tests subdirectory
 if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
     $ModuleBase = Split-Path $ModuleBase -Parent

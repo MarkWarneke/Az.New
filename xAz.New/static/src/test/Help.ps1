@@ -13,8 +13,11 @@
 #>
 
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
-$FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test.Exceptions.txt"
 
+# For tests in .\Module subdirectory
+if ((Split-Path $ModuleBase -Leaf) -eq 'Module') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
 # For tests in .\Tests subdirectory
 if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
     $ModuleBase = Split-Path $ModuleBase -Parent
@@ -43,10 +46,10 @@ Get-Module $ModuleName | Remove-Module
 $Module = Import-Module $ModuleBase\$ModuleName.psd1 -PassThru -ErrorAction Stop
 $commands = Get-Command -Module $module -CommandType Cmdlet, Function, Workflow  # Not alias
 
+$FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test\Module\Test.Exceptions.txt"
 
 ## When testing help, remember that help is cached at the beginning of each session.
 ## To test, restart session.
-
 foreach ($command in $commands) {
     $commandName = $command.Name
 

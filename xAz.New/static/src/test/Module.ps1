@@ -1,5 +1,16 @@
-$moduleRoot = Resolve-Path "$PSScriptRoot\.."
-$moduleName = Split-Path $moduleRoot -Leaf
+$ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# For tests in .\Module subdirectory
+if ((Split-Path $ModuleBase -Leaf) -eq 'Module') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
+# For tests in .\Tests subdirectory
+if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
+
+# Leave must match the module name e.g. xAz.New/xAz.New.psm1
+$moduleName = Split-Path $ModuleBase -Leaf
 
 Describe "General project validation: $moduleName"  -Tag Build {
 

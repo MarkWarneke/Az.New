@@ -25,8 +25,8 @@ function New-Pipeline {
 
         foreach ($aPath in $paths) {
             if ($pscmdlet.ShouldProcess($aPath, 'Create Pipeline')) {
-                # Process each path
-
+                $files = Get-xAzPipelineFiles
+                $null = Copy-Item -Path $files -Destination $Path
             }
         }
     }

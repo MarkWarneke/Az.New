@@ -38,7 +38,7 @@
                 <file source='src\template\azuredeploy.json' destination='Static\azuredeploy.json'/>
                 <file source='src\template\azuredeployParameter.json' destination='Static\azuredeploy.parameters.json'/>
                 <templateFile source='src\template\metadata.json' destination='Static\metadata.json'/>
-                <file source='src\template\azuredeployTests.ps1' destination='Static\azuredeploy.tests.ps1'/>
+
 
 
                 <message> Creating functions for module: $PLASTER_PARAM_ModuleName </message>
@@ -50,12 +50,15 @@
                 <templateFile source='src\newDeployment.ps1' destination='Public\New-Deployment.ps1'/>
 
                 <message> Creating tests for module: $PLASTER_PARAM_ModuleName </message>
-                <templateFile source='src\testTemplate.ps1' destination='Test\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
-                <templateFile source='src\test\Module.ps1' destination='Test\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
+                <templateFile source='src\template\azuredeployTests.ps1' destination='Test\Unit\azuredeploy.tests.ps1'/>
+                <templateFile source='src\testTemplate.ps1' destination='Test\Unit\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
+                <templateFile source='src\test\Module.ps1' destination='Test\Module\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
                 <templateFile source='src\test\Shared.ps1' destination='Test\Shared.Tests.ps1' />
-                <templateFile source='src\test\Project.ps1' destination='Test\Project.Tests.ps1'/>
-                <templateFile source='src\test\Help.ps1' destination='Test\Help.Tests.ps1'/>
-                <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Test.Exceptions.txt'/>
+                <templateFile source='src\test\Project.ps1' destination='Test\Module\Project.Tests.ps1'/>
+                <templateFile source='src\test\Help.ps1' destination='Test\Module\Help.Tests.ps1'/>
+                <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Module\Test.Exceptions.txt'/>
+                <file destination='Test\Integration' source='' />
+
 
                 <message> Creating localization file</message>
                 <templateFile source='src\localization\localization.psd1' destination='Localization\en-US\localization.strings.psd1'/>

@@ -1,7 +1,14 @@
 # Dot source this script in any Pester test script that requires the module to be imported.
 
 $ModuleManifestName = '<%=$PLASTER_PARAM_ModuleName%>.psd1'
-$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+
+$ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
+
+$ModuleManifestPath = Join-Path $ModuleBase $ModuleManifestName
 
 if (!$SuppressImportModule) {
     # -Scope Global is needed when running tests from inside of psake, otherwise
