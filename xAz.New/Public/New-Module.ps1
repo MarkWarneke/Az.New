@@ -129,8 +129,9 @@ function New-Module {
             $GeneratedModuleManifestFile = Get-ChildItem -Path $DestinationPath -Name "$NewModuleName.psd1" -ErrorAction Stop
             $null = Update-Manifest -Path $GeneratedModuleManifestFile.PSPath -DefaultCommandPrefix $DefaultCommandPrefix
 
-
             $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
+
+            New-xAzPipeline -Path $Path
 
             $plaster
         }
