@@ -46,7 +46,7 @@ else {
     $armTemplate = Get-<%=$PLASTER_PARAM_Prefix%>Template
 }
 
-Describe "test arm template $armTemplate" {
+Describe "test arm template $armTemplate" -Tag Unit {
 
 
     $null = Test-Path $armTemplate -ErrorAction Stop
