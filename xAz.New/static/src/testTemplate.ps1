@@ -2,6 +2,10 @@ $script:ModuleName = '<%= $PLASTER_PARAM_ModuleName %>'
 # Removes all versions of the module from the session before importing
 Get-Module $ModuleName | Remove-Module
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+if ((Split-Path $ModuleBase -Leaf) -eq 'Unit') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
 # For tests in .\Tests subdirectory
 if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
     $ModuleBase = Split-Path $ModuleBase -Parent

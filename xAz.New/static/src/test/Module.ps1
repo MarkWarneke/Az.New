@@ -14,7 +14,7 @@ $moduleName = Split-Path $ModuleBase -Leaf
 
 Describe "General project validation: $moduleName"  -Tag Build {
 
-    $scripts = Get-ChildItem $moduleRoot -Include *.ps1, *.psm1, *.psd1 -Recurse
+    $scripts = Get-ChildItem $ModuleBase -Include *.ps1, *.psm1, *.psd1 -Recurse
 
     # TestCases are splatted to the script so we need hashtables
     $testCase = $scripts | Foreach-Object {@{file = $_}}
@@ -30,6 +30,6 @@ Describe "General project validation: $moduleName"  -Tag Build {
     }
 
     It "Module '$moduleName' can import cleanly" {
-        {Import-Module (Join-Path $moduleRoot "$moduleName.psm1") -force } | Should Not Throw
+        {Import-Module (Join-Path $ModuleBase "$moduleName.psm1") -force } | Should Not Throw
     }
 }

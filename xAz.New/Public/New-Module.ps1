@@ -74,10 +74,12 @@ function New-Module {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Mandatory, Position = 0)]
-        [string] $ModuleName,
+        [Alias('ModuleName')]
+        [string] $Name,
 
         [Parameter(Mandatory, Position = 1)]
-        [string] $ModuleDescription,
+        [Alias('ModuleDescription')]
+        [string] $Description,
 
         [Parameter(Mandatory, Position = 2)]
         [string] $Path,
@@ -89,27 +91,31 @@ function New-Module {
         [string] $EMail,
 
         [Parameter()]
-        [string] $CompanyName,
+        [Alias('CompanyName')]
+        [string] $Company,
 
         [Parameter()]
+        [Alias('Author', 'UserName')]
         [string] $AuthorName = $env:USERNAME,
 
         [Parameter()]
+        [Alias('TemplatePath')]
         [string] $TemplateUri,
 
         [Parameter()]
+        [Alias('FolderPrefix')]
         [string] $Prefix = "xAz."
     )
 
     $TemplatePath = Get-xAzManifest
-    $NewModuleName = "{0}{1}" -f $Prefix, $ModuleName
+    $NewModuleName = "{0}{1}" -f $Prefix, $Name
     $DestinationPath = (Join-Path $Path $NewModuleName)  # Must be named exactly like ModuleName for tests
 
     $plaster = @{
-        AuthorName        = $AuthorName
-        CompanyName       = $CompanyName
+        AuthorName        = $Author
+        CompanyName       = $Company
         ModuleName        = $NewModuleName
-        ModuleDescription = $ModuleDescription
+        ModuleDescription = $Description
         Version           = "0.0.1"
         EMail             = $EMail
         Prefix            = $DefaultCommandPrefix

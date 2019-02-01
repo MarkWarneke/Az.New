@@ -1,4 +1,4 @@
-﻿#REQUIRES -Version 5.0
+#REQUIRES -Version 5.0
 #REQUIRES #-Modules
 #REQUIRES #-RunAsAdministrator
 
@@ -129,7 +129,7 @@ function Get-DeploymentOutput {
             Takes Outputs from Arm Template deployment and generates a pscustomobject.
 
         .NOTES
-            Outputs is Dictionary`2  needs enumerator
+            Outputs is Dictionary  needs enumerator
             Output value has odd value key again -> $output.Value.Value
 
             [DBG]: PS C:> $output
@@ -152,7 +152,7 @@ function Get-DeploymentOutput {
     )
 
     if (-Not $Outputs) {
-        Write-Error "[$(Get-Date)] Deployment output can not be parsed ´n $Deployment"
+        Write-Error "[$(Get-Date)] Deployment output can not be parsed _n $Deployment"
         return
     }
     else {

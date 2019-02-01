@@ -7,7 +7,7 @@ function Get-Name {
         Get the name by naming convention
 
         .DESCRIPTION
-    Get the name by naming convention
+        Get the name by naming convention
 
         .EXAMPLE
         Get-<%= $PLASTER_PARAM_ModuleName %>Name -Environment 'P'
