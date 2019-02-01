@@ -22,6 +22,6 @@ function Get-PipelineFiles {
     }
     process {
         Write-Verbose -Message ($script:localizedData.RetrievingFolderInformation -f $path)
-        Get-ChildItem $Path
+        Get-ChildItem $path
     }
 }

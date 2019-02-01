@@ -73,13 +73,13 @@ function New-Module {
 
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, Position = 0)]
         [string] $ModuleName,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, Position = 1)]
         [string] $ModuleDescription,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, Position = 2)]
         [string] $Path,
 
         [Parameter()]
@@ -131,7 +131,7 @@ function New-Module {
 
             $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
 
-            New-xAzPipeline -Path $Path
+            New-xAzPipeline -Path $DestinationPath
 
             $plaster
         }

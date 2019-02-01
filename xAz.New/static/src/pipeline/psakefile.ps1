@@ -18,7 +18,7 @@ Properties {
         $ProjectRoot = $PSScriptRoot
     }
 
-    $ModuleName = @('mrAz.Test')
+    $ModuleName = @('<%=$PLASTER_PARAM_Prefix%><%=$PLASTER_PARAM_ModuleName%>')
 
     $Timestamp = Get-Date -uformat "%Y%m%d-%H%M%S"
     $PSVersion = $PSVersionTable.PSVersion.Major
