@@ -50,7 +50,7 @@
                 <templateFile source='src\newDeployment.ps1' destination='Public\New-Deployment.ps1'/>
 
                 <message> Creating tests for module: $PLASTER_PARAM_ModuleName </message>
-                <templateFile source='src\test\azuredeployTests.ps1' destination='Test\Unit\azuredeploy.tests.ps1'/>
+                <templateFile source='src\test\azuredeploytests.ps1' destination='Test\Unit\azuredeploy.Tests.ps1'/>
                 <templateFile source='src\testTemplate.ps1' destination='Test\Unit\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
                 <templateFile source='src\test\Module.ps1' destination='Test\Module\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
                 <templateFile source='src\test\Shared.ps1' destination='Test\Shared.Tests.ps1' />
@@ -59,7 +59,7 @@
                 <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Module\Test.Exceptions.txt'/>
                 <file destination='Test\Integration' source='' />
 
-                <message> Creating pipeline file</messsage>
+                <message> Creating pipeline file</message>
                 <templateFile source='src\pipeline\gitignore' destination='.gitignore'/>
                 <templateFile source='src\pipeline\azure-pipelines.yml' destination='azure-pipelines.yml'/>
                 <templateFile source='src\pipeline\psake.ps1' destination='psake.ps1'/>

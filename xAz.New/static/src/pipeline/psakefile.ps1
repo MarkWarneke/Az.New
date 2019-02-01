@@ -18,11 +18,13 @@ Properties {
         $ProjectRoot = $PSScriptRoot
     }
 
-    $ModuleName = @('<%=$PLASTER_PARAM_Prefix%><%=$PLASTER_PARAM_ModuleName%>')
+    $ModuleBase = @('.')
+    Write-Verbose "$ModuleBase"
 
-    $Timestamp = Get-Date -uformat "%Y%m%d-%H%M%S"
-    $PSVersion = $PSVersionTable.PSVersion.Major
+    $Timestamp = Get-Date -uformat "%Y%m%d-%H%M%S"\
+    Write-Verbose "$Timestamp"
     $separator = '----------------------------------------------------------------------'
+    Write-Verbose "$separator"
 }
 
 Task Default -Depends Test
@@ -43,7 +45,7 @@ Task Init {
 
 Task PrepareTest -Depends Init {
     # Install any dependencies required for testing
-    foreach ($module in $ModuleName) {
+    foreach ($module in $ModuleBase) {
         # Execute tests
         $moduleRoot = Join-Path -Path $ProjectRoot -ChildPath $module
         $testScriptsPath = Join-Path -Path $moduleRoot -ChildPath 'test'
@@ -56,7 +58,7 @@ Task Test -Depends ModuleTest, UnitTest, IntegrationTest
 Task ModuleTest -Depends Init, PrepareTest {
     $separator
 
-    foreach ($module in $ModuleName) {
+    foreach ($module in $ModuleBase) {
         # Execute tests
         $moduleRoot = Join-Path -Path $ProjectRoot -ChildPath $module
         $testScriptsPath = Join-Path -Path $moduleRoot -ChildPath 'test\Module'
@@ -69,7 +71,7 @@ Task ModuleTest -Depends Init, PrepareTest {
             PassThru     = $true
             ExcludeTag   = 'Incomplete, Unit'
         }
-        $testResults = Invoke-Pester @pester
+        $null = Invoke-Pester @pester
     }
 
     "`n"
@@ -78,12 +80,12 @@ Task ModuleTest -Depends Init, PrepareTest {
 Task UnitTest -Depends Init, PrepareTest {
     $separator
 
-    foreach ($module in $ModuleName) {
+    foreach ($module in $ModuleBase) {
         # Execute tests
         $moduleRoot = Join-Path -Path $ProjectRoot -ChildPath $module
         $testScriptsPath = Join-Path -Path $moduleRoot -ChildPath 'Test\Unit'
         $testResultsFile = Join-Path -Path $ProjectRoot -ChildPath 'TestResults.unit.xml'
-        $codeCoverageFile = Join-Path -Path $ProjectRoot -ChildPath 'CodeCoverage.xml'
+        # $codeCoverageFile = Join-Path -Path $ProjectRoot -ChildPath 'CodeCoverage.xml'
 
         $pester = @{
             Script       = $testScriptsPath
@@ -96,7 +98,7 @@ Task UnitTest -Depends Init, PrepareTest {
             # CodeCoverageOutputFile       = $codeCoverageFile
             # CodeCoverageOutputFileFormat = 'JaCoCo'
         }
-        $testResults = Invoke-Pester @pester
+        $null = Invoke-Pester @pester
 
     }
     "`n"
@@ -105,7 +107,7 @@ Task UnitTest -Depends Init, PrepareTest {
 Task IntegrationTest -Depends Init, PrepareTest {
     $separator
 
-    foreach ($module in $ModuleName) {
+    foreach ($module in $ModuleBase) {
         # Execute tests
         $moduleRoot = Join-Path -Path $ProjectRoot -ChildPath $module
         $testScriptsPath = Join-Path -Path $moduleRoot -ChildPath 'Test\Integration'
@@ -119,7 +121,7 @@ Task IntegrationTest -Depends Init, PrepareTest {
                 PassThru     = $true
                 ExcludeTag   = 'Incomplete'
             }
-            $testResults = Invoke-Pester @pester
+            $null = Invoke-Pester @pester
         }
     }
 

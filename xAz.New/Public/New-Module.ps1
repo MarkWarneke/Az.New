@@ -131,8 +131,6 @@ function New-Module {
 
             $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
 
-            New-xAzPipeline -Path $DestinationPath
-
             $plaster
         }
     }

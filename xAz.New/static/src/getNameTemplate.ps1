@@ -4,9 +4,10 @@
 function Get-Name {
     <#
         .SYNOPSIS
-        Get the name by naming convention <Environment>
+        Get the name by naming convention
 
         .DESCRIPTION
+    Get the name by naming convention
 
         .EXAMPLE
         Get-<%= $PLASTER_PARAM_ModuleName %>Name -Environment 'P'
@@ -42,12 +43,12 @@ function Get-Name {
         [string]
         [ValidatePattern("(\-|\s)")] # matches dash or space
         [ValidateLength(1, 1)]
-        $Delimiter = "-",
-
-
-        [int]
-        $CHARACTER_NAME_LIMIT = 100
+        $Delimiter = "-"
     )
+
+    begin {
+        [int] $CHARACTER_NAME_LIMIT = 100
+    }
 
     process {
 

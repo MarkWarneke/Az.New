@@ -9,6 +9,8 @@ function Get-Secret {
 
     .EXAMPLE
     Get-<%= $PLASTER_PARAM_Prefix %>KeyVaulSecret
+
+    Returns the secrets
     #>
 
     [CmdletBinding()]
