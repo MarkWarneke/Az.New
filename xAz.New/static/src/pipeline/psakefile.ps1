@@ -21,7 +21,7 @@ Properties {
     $ModuleBase = @('.')
     Write-Verbose "$ModuleBase"
 
-    $Timestamp = Get-Date -uformat "%Y%m%d-%H%M%S"\
+    $Timestamp = Get-Date -uformat "%Y%m%d-%H%M%S"
     Write-Verbose "$Timestamp"
     $separator = '----------------------------------------------------------------------'
     Write-Verbose "$separator"
