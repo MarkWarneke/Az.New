@@ -11,6 +11,10 @@
 # Dot source the import of module
 ###############################################################################
 . $PSScriptRoot\shared.ps1
+
+# Excludes list of files
+$FunctionHelpTestExceptions = Get-Content -Path (Join-Path $PSScriptRoot "Test.Exceptions.txt")
+
 Describe "PSScriptAnalyzer rule-sets" -Tag Build , ScriptAnalyzer {
 
     $Rules = Get-ScriptAnalyzerRule

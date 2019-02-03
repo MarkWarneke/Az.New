@@ -26,7 +26,7 @@ function Update-Template {
             else {
                 if ($PSCmdlet.ShouldProcess($ExistingTemplate, $TemplateUri)) {
                     Write-Verbose "[$(Get-Date)] Replace generated $ExistingTemplate with $TemplateUri"
-                    Move-Item $TemplateUri $ExistingTemplate -Force -PassThru
+                    Copy-Item $TemplateUri $ExistingTemplate -Force -PassThru
                 }
             }
         }

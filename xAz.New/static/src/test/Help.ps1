@@ -25,7 +25,8 @@
 
 $commands = Get-Command -Module $module -CommandType Cmdlet, Function, Workflow  # Not alias
 
-$FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test\Module\Test.Exceptions.txt"
+# Excludes list of files
+$FunctionHelpTestExceptions = Get-Content -Path (Join-Path $PSScriptRoot "Test.Exceptions.txt")
 
 ## When testing help, remember that help is cached at the beginning of each session.
 ## To test, restart session.

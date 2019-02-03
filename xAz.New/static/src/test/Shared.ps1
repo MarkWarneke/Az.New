@@ -61,7 +61,7 @@ Get-Module $ModuleName | Remove-Module
 
 # Because ModuleBase includes version number, this imports the required version
 # of the module
-$ModuleManifestPath = Join-Path $ModuleBase $ModuleName.psd1
+$ModuleManifestPath = Join-Path $ModuleBase "$ModuleName.psd1"
 
 $Module = Import-Module $ModuleManifestPath -PassThru -ErrorAction Stop
 

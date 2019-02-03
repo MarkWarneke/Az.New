@@ -1,9 +1,9 @@
 
-function Get-Guide {
+function Get-BestPratice {
     [CmdletBinding()]
     param (
     )
     process {
-        Get-xAzUri GUIDE
+        Get-xAzUri BEST_PRACTICES
     }
 }

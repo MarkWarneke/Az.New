@@ -10,13 +10,9 @@ function Get-Reference {
         $ProviderNamespace
     )
 
-    begin {
-        $REFERENCE_URI = "https://docs.microsoft.com/en-us/azure/templates/{0}/allversions"
-    }
-
     process {
         foreach ($type in $ProviderNamespace) {
-            $uri = $REFERENCE_URI -f $type
+            $uri = (get-xAzUri REFERENCE) -f $type
             if (Test-UriStatus $uri) {
                 $uri
             }
@@ -25,9 +21,6 @@ function Get-Reference {
 
             }
         }
-    }
-
-    end {
     }
 }
 

@@ -1,4 +1,4 @@
-function Publish-Template {
+function Publish-_Template {
     [CmdletBinding(SupportsShouldProcess)]
     param (
         # Name of storage account

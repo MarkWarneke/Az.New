@@ -1,9 +1,8 @@
-
-function Get-Guide {
+function Get-TemplateSchemaUri {
     [CmdletBinding()]
     param (
     )
     process {
-        Get-xAzUri GUIDE
+        Get-xAzUri SCHEMA
     }
 }

@@ -1,9 +1,9 @@
 
-function Get-Guide {
+function Get-Documentation {
     [CmdletBinding()]
     param (
     )
     process {
-        Get-xAzUri GUIDE
+        Get-xAzUri DOCS
     }
 }

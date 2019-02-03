@@ -1,4 +1,4 @@
-function Get-Manifest {
+function Get-PlasterManifest {
     <#
     .SYNOPSIS
     Returns the link to the modules template
@@ -9,7 +9,7 @@ function Get-Manifest {
     Attribute FileList = @('./static/PlasterManifest.xml')
 
     .EXAMPLE
-    Get-xAzManifest
+    Get-xAzPlasterManifest
 
     .\Az.New\static\PlasterManifest.xml
 
