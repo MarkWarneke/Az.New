@@ -1,3 +1,35 @@
+<#
+.SYNOPSIS
+
+Installes PSSake, if not existing.
+Runs psakefile.ps1 with passed parameters
+Author: Daniel Scott-Raynsford [Github: CosmosDb](https://github.com/PlagueHO/CosmosDB)
+
+.DESCRIPTION
+
+Installes PSSake, if not existing.
+Runs psakefile.ps1 with passed parameters
+Author: Daniel Scott-Raynsford [Github: CosmosDb](https://github.com/PlagueHO/CosmosDB)
+
+.PARAMETER TaskList
+Specify name of task to run, used in psakefile.ps1
+
+.PARAMETER Parameters
+Specify Parameters passed to psakefile.ps1
+
+.PARAMETER Properties
+Specify Properties passed to psakefile.ps1
+
+.EXAMPLE
+
+C:\PS> .\psake.ps1 -TaskList Test -Verbose
+Run psakefile TaskLists named "Test"
+
+.LINK
+https://github.com/PlagueHO/CosmosDB
+
+#>
+
 [CmdletBinding()]
 param (
     [Parameter()]
@@ -19,13 +51,14 @@ Write-Verbose -Message ('Beginning ''{0}'' process...' -f ($TaskList -join ','))
 $null = Get-PackageProvider -Name NuGet -ForceBootstrap
 Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 
-$module = Get-Module psake -ListAvailable
-if ($module) {
-    Import-Module psake
+# Install PSake module if it is not already installed
+if (-not (Get-Module -Name PSDepend -ListAvailable)) {
+    Install-Module -Name PSDepend -Scope CurrentUser -Force -Confirm:$false
 }
-else {
-    Install-Module psake -Force -Verbose -Scope CurrentUser
-}
+
+# Install build dependencies required for Init task
+Import-Module -Name PSDepend
+Invoke-PSDepend -Path $PSScriptRoot -Force -Import -Install -Tags 'Bootstrap'
 
 # Execute the PSake tasts from the psakefile.ps1
 Invoke-Psake -buildFile (Join-Path -Path $PSScriptRoot -ChildPath 'psakefile.ps1') -nologo @PSBoundParameters
