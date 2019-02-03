@@ -64,6 +64,7 @@
                 <templateFile source='src\pipeline\azure-pipelines.yml' destination='azure-pipelines.yml'/>
                 <templateFile source='src\pipeline\psake.ps1' destination='psake.ps1'/>
                 <templateFile source='src\pipeline\psakefile.ps1' destination='psakefile.ps1'/>
+                <templateFile source='src\pipeline\module.depend.psd1' destination='module.depend.psd1'/>
 
 
                 <message> Creating localization file</message>
