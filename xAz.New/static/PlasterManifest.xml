@@ -51,9 +51,11 @@
 
                 <message> Creating tests for module: $PLASTER_PARAM_ModuleName </message>
                 <templateFile source='src\test\azuredeploytests.ps1' destination='Test\Unit\azuredeploy.Tests.ps1'/>
-                <templateFile source='src\testTemplate.ps1' destination='Test\Unit\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
+                <templateFile source='src\test\testTemplate.ps1' destination='Test\Unit\${PLASTER_PARAM_FunctionName}.Tests.ps1'/>
                 <templateFile source='src\test\Module.ps1' destination='Test\Module\${PLASTER_PARAM_ModuleName}.Tests.ps1' />
-                <templateFile source='src\test\Shared.ps1' destination='Test\Shared.Tests.ps1' />
+                <templateFile source='src\test\Shared.ps1' destination='Test\Module\Shared.ps1' />
+                <templateFile source='src\test\Shared.ps1' destination='Test\Unit\Shared.ps1' />
+                <templateFile source='src\test\Shared.ps1' destination='Test\Integration\Shared.ps1' />
                 <templateFile source='src\test\Project.ps1' destination='Test\Module\Project.Tests.ps1'/>
                 <templateFile source='src\test\Help.ps1' destination='Test\Module\Help.Tests.ps1'/>
                 <templateFile source='src\test\Test.Exceptions.txt' destination='Test\Module\Test.Exceptions.txt'/>

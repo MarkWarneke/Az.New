@@ -1,49 +1,16 @@
 param (
     $Path
 )
-
-$ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
-
-if ((Split-Path $ModuleBase -Leaf) -eq 'Unit') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-
-
-# For tests in .\Tests subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-
-# Handles modules in version directories
-$leaf = Split-Path $ModuleBase -Leaf
-$parent = Split-Path $ModuleBase -Parent
-$parsedVersion = $null
-if ([System.Version]::TryParse($leaf, [ref]$parsedVersion)) {
-    $ModuleName = Split-Path $parent -Leaf
-}
-# for VSTS build agent
-elseif ($leaf -eq 's') {
-    $ModuleName = $Env:Build_Repository_Name.Split('/')[1]
-}
-else {
-    $ModuleName = $leaf
-}
-# Removes all versions of the module from the session before importing
-Get-Module $ModuleName | Remove-Module
-# For tests in .\Tests subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-## this variable is for the VSTS tasks and is to be used for refernecing any mock artifacts
-$Env:ModuleBase = $ModuleBase
-Import-Module $ModuleBase\$ModuleName.psd1 -PassThru -ErrorAction Stop | Out-Null
-
+###############################################################################
+# Dot source the import of module
+###############################################################################
+. $PSScriptRoot\shared.ps1
 
 if ($path) {
     $armTemplate = $path
 }
 else {
-    $armTemplate = Get-<%=$PLASTER_PARAM_Prefix%>Template
+    $armTemplate = Get-xAzTemplate
 }
 
 Describe "test arm template $armTemplate" -Tag Unit {

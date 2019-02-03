@@ -1,49 +1,28 @@
 <#
-	.NOTES
+    .SYNOPSIS
+    To test help for the commands in a module, place this file in the module folder.
+
+	.DESCRIPTION
+    To test help for the commands in a module, place this file in the module folder.
+
+    .NOTES
 		===========================================================================
 		Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2016 v5.2.119
 		Created on:   	4/12/2016 1:11 PM
 		Created by:   	June Blender
 		Organization: 	SAPIEN Technologies, Inc
 		Filename:		*.Help.Tests.ps1
-		===========================================================================
-	.DESCRIPTION
-	To test help for the commands in a module, place this file in the module folder.
-	To test any module from any path, use https://github.com/juneb/PesterTDD/Module.Help.Tests.ps1
+        ===========================================================================
+
+    .LINK
+     To test any module from any path, use https://github.com/juneb/PesterTDD/Module.Help.Tests.ps1
 #>
 
-$ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+###############################################################################
+# Dot source the import of module
+###############################################################################
+. $PSScriptRoot\shared.ps1
 
-# For tests in .\Module subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Module') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-# For tests in .\Tests subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-
-# Handles modules in version directories
-$leaf = Split-Path $ModuleBase -Leaf
-$parent = Split-Path $ModuleBase -Parent
-$parsedVersion = $null
-if ([System.Version]::TryParse($leaf, [ref]$parsedVersion)) {
-    $ModuleName = Split-Path $parent -Leaf
-}
-# for VSTS build agent
-elseif ($leaf -eq 's') {
-    $ModuleName = $Env:Build_Repository_Name.Split('/')[1]
-}
-else {
-    $ModuleName = $leaf
-}
-
-# Removes all versions of the module from the session before importing
-Get-Module $ModuleName | Remove-Module
-
-# Because ModuleBase includes version number, this imports the required version
-# of the module
-$Module = Import-Module $ModuleBase\$ModuleName.psd1 -PassThru -ErrorAction Stop
 $commands = Get-Command -Module $module -CommandType Cmdlet, Function, Workflow  # Not alias
 
 $FunctionHelpTestExceptions = Get-Content -Path "$ModuleBase\Test\Module\Test.Exceptions.txt"
@@ -123,3 +102,4 @@ foreach ($command in $commands) {
         }
     }
 }
+

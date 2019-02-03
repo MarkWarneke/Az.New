@@ -1,16 +1,16 @@
-$ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+<#
+.SYNOPSIS
+    Gets all PowerShell files and trys to parse them
+.DESCRIPTION
+   Gets all PowerShell files that match *.ps1, *.psm1, *.psd1  in ModuleBase  and trys to parse them
+   Will try to import the module cleanly
+#>
 
-# For tests in .\Module subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Module') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
-# For tests in .\Tests subdirectory
-if ((Split-Path $ModuleBase -Leaf) -eq 'Test') {
-    $ModuleBase = Split-Path $ModuleBase -Parent
-}
 
-# Leave must match the module name e.g. xAz.New/xAz.New.psm1
-$moduleName = Split-Path $ModuleBase -Leaf
+###############################################################################
+# Dot source the import of module
+###############################################################################
+. $PSScriptRoot\shared.ps1
 
 Describe "General project validation: $moduleName"  -Tag Build {
 
