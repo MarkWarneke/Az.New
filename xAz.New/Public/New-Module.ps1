@@ -107,7 +107,7 @@ function New-Module {
         [string] $Prefix = "xAz."
     )
 
-    $TemplatePath = Get-xAzManifest
+    $TemplatePath = Get-xAzPlasterManifest
     $NewModuleName = "{0}{1}" -f $Prefix, $Name
     $DestinationPath = (Join-Path $Path $NewModuleName)  # Must be named exactly like ModuleName for tests
 
