@@ -70,6 +70,7 @@ New-xAzKVDeployment -ResourceName $Name
 
 xAz.New Module
 
+- [PSDepend](https://github.com/RamblingCookieMonster/PSDepend)
 - [Plaster](https://github.com/PowerShell/Plaster)
 - [Pester](https://github.com/Pester/Pester)
 - [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer)
