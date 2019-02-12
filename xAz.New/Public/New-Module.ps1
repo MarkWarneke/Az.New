@@ -121,26 +121,24 @@ function New-Module {
         Prefix            = $DefaultCommandPrefix
     }
 
-    if (!(Test-Path -LiteralPath $DestinationPath)) {
-        # Resolve any relative paths
-        $DestinationPath = $psCmdlet.SessionState.Path.GetUnresolvedProviderPathFromPSPath($DestinationPath)
-        $TemplateDirectory = Split-Path $TemplatePath -Parent
+    # Resolve any relative paths
+    $DestinationPath = $psCmdlet.SessionState.Path.GetUnresolvedProviderPathFromPSPath($DestinationPath)
+    $TemplateDirectory = Split-Path $TemplatePath -Parent
 
-        if ($pscmdlet.ShouldProcess($DestinationPath, 'Invoke-Plaster')) {
-            Write-Verbose -Message "[$(Get-Date)] Create folder"
-            New-Item -ItemType Directory -Path $DestinationPath
-            Write-Verbose -Message "[$(Get-Date)] Generate Module"
-            $plaster = Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -PassThru
+    if ($pscmdlet.ShouldProcess($DestinationPath, 'Invoke-Plaster')) {
+        Write-Verbose -Message "[$(Get-Date)] Create folder"
 
-            $GeneratedModuleManifestFile = Get-ChildItem -Path $DestinationPath -Name "$NewModuleName.psd1" -ErrorAction Stop
-            $null = Update-Manifest -Path $GeneratedModuleManifestFile.PSPath -DefaultCommandPrefix $DefaultCommandPrefix
+        New-Item -ItemType Directory -Path $DestinationPath -ErrorAction Inquire
 
-            $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
+        Write-Verbose -Message "[$(Get-Date)] Generate Module"
+        $plaster = Invoke-Plaster -DestinationPath $DestinationPath -TemplatePath $TemplateDirectory @plaster -PassThru
 
-            $plaster
-        }
+        $GeneratedModuleManifestFile = Get-ChildItem -Path $DestinationPath -Name "$NewModuleName.psd1" -ErrorAction Stop
+        $null = Update-Manifest -Path $GeneratedModuleManifestFile.PSPath -DefaultCommandPrefix $DefaultCommandPrefix
+
+        $null = Update-Template -Path $DestinationPath -TemplateUri $TemplateUri
+
+        $plaster
     }
-    else {
-        Write-Error ("New Module Path already exsists! {0} not created" -f $NewModuleName)
-    }
+
 }
