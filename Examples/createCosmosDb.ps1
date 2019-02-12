@@ -4,7 +4,7 @@
 
     .DESCRIPTION
     Create a PowerShell tool module for Azure Cosmos DB based on azure-quickstart-template ARM template
-    Downloads the ARM template from "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-cosmosdb-create-arm-template/azuredeploy.json"
+    Downloads the ARM template from "https://raw.githubusercontent.com/mark-mit-k/Az.New/master/Template/CosmosDb/azuredeploy.json"
     The module is located in $Path, or by default in "C:\temp".
     After the scaffolding of the module it will open the explorer
     Will wait for the users input to delete the newly create folder structure.
@@ -38,8 +38,8 @@
 #>
 param(
     # Local path where module should be created
-    [Parameter(HelpMessage = "Local path where module should be created")]
-    $Path = "C:\temp"
+    [Parameter(Mandatory, HelpMessage = "Local path where module should be created")]
+    $Path
 )
 
 # Import xAz.New module
@@ -54,7 +54,7 @@ $input = @{
     EMail                = "mark.warneke@gmail.com"
     CompanyName          = "Microsoft"
     AuthorName           = "Mark"
-    TemplateUri          = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-cosmosdb-create-arm-template/azuredeploy.json"
+    TemplateUri          = "https://raw.githubusercontent.com/mark-mit-k/Az.New/master/Template/CosmosDb/azuredeploy.json"
 }
 # Create new module
 $Module = New-xAzModule @Input
