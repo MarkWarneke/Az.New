@@ -1,1 +1,3 @@
 PSUseToExportFieldsInManifest
+PSAvoidUsingCmdletAliases
+PSAvoidUsingWriteHost

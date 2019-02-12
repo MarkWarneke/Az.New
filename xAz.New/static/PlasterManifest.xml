@@ -48,6 +48,7 @@
                 <templateFile source='src\getArmTemplate.ps1' destination='Public\Get-Template.ps1'/>
                 <templateFile source='src\getKeyVaultSecretTemplate.ps1' destination='Public\Get-Secret.ps1'/>
                 <templateFile source='src\newDeployment.ps1' destination='Public\New-Deployment.ps1'/>
+                <templateFile source='src\getDeploymentOutput.ps1' destination='Private\Get-DeploymentOutput.ps1'/>
 
                 <message> Creating tests for module: $PLASTER_PARAM_ModuleName </message>
                 <templateFile source='src\test\azuredeploytests.ps1' destination='Test\Unit\azuredeploy.Tests.ps1'/>

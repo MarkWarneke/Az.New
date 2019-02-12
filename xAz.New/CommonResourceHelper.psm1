@@ -222,12 +222,19 @@ function Get-LocalizedData {
         $ScriptRoot
     )
 
-    if ( -not $ScriptRoot ) {
-        $resourceDirectory = Join-Path -Path $PSScriptRoot -ChildPath $ResourceName
-        $localizedStringFileLocation = Join-Path -Path $resourceDirectory -ChildPath $PSUICulture
+    if ($PSUICulture) {
+        $Culture = $PSUICulture
     }
     else {
-        $localizedStringFileLocation = Join-Path -Path $ScriptRoot -ChildPath $PSUICulture
+        $Culture = 'en-US'
+    }
+
+    if ( -not $ScriptRoot ) {
+        $resourceDirectory = Join-Path -Path $PSScriptRoot -ChildPath $ResourceName
+        $localizedStringFileLocation = Join-Path -Path $resourceDirectory -ChildPath $Culture
+    }
+    else {
+        $localizedStringFileLocation = Join-Path -Path $ScriptRoot -ChildPath $Culture
     }
 
     if (-not (Test-Path -Path $localizedStringFileLocation)) {

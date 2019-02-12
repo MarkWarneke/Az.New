@@ -56,6 +56,6 @@
         }
         Target         = 'CurrentUser'
         Version        = '1.2.1'
-        Tags           = 'Test', 'Deploy'
+        Tags           = 'Local'
     }
 }

@@ -74,37 +74,31 @@ function New-Deployment {
     )
 
     begin {
-
+        $TemplateUri = Get-<%= $PLASTER_PARAM_Prefix %>Template
+        # Register Providers
     }
 
     process {
-
-        $TemplateUri = Get-<%= $PLASTER_PARAM_Prefix %>Template
-
-        if ([string]::IsNullOrEmpty($ResourceName)) {
-
-        }
-        Write-Verbose "[$(Get-Date)] ResourceName $ResourceName"
+        Write-Verbose ("[$(Get-Date)] ResourceName {0}" -f $ResourceName)
 
         $ResourceGroup = Get-AzureRmResourceGroup $ResourceGroupName -ErrorAction Stop
-        Write-Verbose "[$(Get-Date)] ResourceGroup $($ResourceGroup.ResourceGroupName)"
+        Write-Verbose ("[$(Get-Date)] ResourceGroup {0}" -f $ResourceGroup.ResourceGroupName)
 
         $TemplateParameterObject = @{
-            Name = $ResourceName
+            resourceName = $ResourceName
         }
 
         try {
 
-            if ($PSCmdlet.ShouldProcess($ResourceGroupName, $ComponentName)) {
-
-                $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject @DeploymentParameter -ErrorVariable ErrorMessages
-
-                if ($ErrorMessages) {
-                    Write-Output '', 'Template deployment returned the following errors:', @(@($ErrorMessages) | ForEach-Object { $_.Exception.Message.TrimEnd("`r`n") })
+            if ($PSCmdlet.ShouldProcess($ResourceGroupName, $ResourceName)) {
+                if ( $DeploymentParameter ) {
+                    $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri @DeploymentParameter -ErrorVariable ErrorMessages
                 }
                 else {
-                    $return = Get-DeploymentOutput $Deployment.Outputs
+                    $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject -ErrorVariable ErrorMessages
                 }
+
+                $return = Get-DeploymentOutput -Deployment $Deployment -ErrorMessage $ErrorMessages
             }
 
             $return
@@ -115,60 +109,9 @@ function New-Deployment {
             throw $_
         }
     }
-
     end {
     }
 }
 
 # Export-ModuleMember -Function New-<%= $PLASTER_PARAM_Prefix %>Deployment
 # New-<%= $PLASTER_PARAM_Prefix %>Deployment -ResourceName -ResourceGroupName
-
-function Get-DeploymentOutput {
-    <#
-        .SYNOPSIS
-            Takes Outputs from Arm Template deployment and generates a pscustomobject.
-
-        .NOTES
-            Outputs is Dictionary  needs enumerator
-            Output value has odd value key again -> $output.Value.Value
-
-            [DBG]: PS C:> $output
-
-            Key              Value
-            ---              -----
-            virtualMachineId Microsoft.Azure.Commands.ResourceManager.Cmdlets.SdkModels.DeploymentVariable
-
-            [DBG]: PS C:> $output.Value
-
-            Type   Value
-            ----   -----
-            String /subscriptions/<subscription>/resourceGroups/<resourceGroup>/providers/Microsoft.<Proivder>/<Resource>/<Value>
-
-            $output.value.value
-    #>
-    [CmdletBinding()]
-    param(
-        $Outputs
-    )
-
-    if (-Not $Outputs) {
-        Write-Error "[$(Get-Date)] Deployment output can not be parsed _n $Deployment"
-        return
-    }
-    else {
-        try {
-            $return = [PSCustomObject]@{}
-            $enum = $Outputs.GetEnumerator()
-
-            while ($enum.MoveNext()) {
-                $current = $enum.Current
-                $return | Add-Member -MemberType NoteProperty -Name $current.Key -Value $current.Value.Value
-            }
-            $return
-        }
-        catch {
-            Write-Verbose "[$(Get-Date)] Unable to parse"
-            return $Outputs
-        }
-    }
-}

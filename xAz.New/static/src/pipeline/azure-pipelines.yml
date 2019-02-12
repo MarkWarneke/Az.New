@@ -16,9 +16,14 @@ jobs:
     - checkout: self
       persistCredentials: true
 
-    - powershell: |
-        .\psake.ps1 -TaskList Test -Verbose
-      displayName: 'Execute Tests'
+    - task: AzurePowerShell@2
+      inputs:
+        azureSubscription: "ARM Connection Christian MSDN"
+        scriptType: "FilePath"
+        scriptPath: .\psake.ps1
+        scriptArguments: -TaskList Test -Verbose
+        azurePowerShellVersion: "latestVersion"
+        errorActionPreference: "continue"
 
     - task: PublishTestResults@2
       inputs:
@@ -52,3 +57,13 @@ jobs:
         failTaskOnFailedTests: true
       displayName: 'Publish Integration Test Results'
       condition: in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues', 'Failed')
+
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: "$(Build.SourcesDirectory)"
+        targetFolder: $(Build.ArtifactStagingDirectory)
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: MyBuildOutputs

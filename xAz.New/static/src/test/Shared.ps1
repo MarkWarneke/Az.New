@@ -20,12 +20,17 @@
     $Module = Imported Module
 
 .EXAMPLE
-    PS C:\> . $PSScriptRoot\import.ps1
+    PS C:\> . $PSScriptRoot\shared.ps1
     Imports the module into the current file
 
 #>
 
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# For tests in .\Integration subdirectory
+if ((Split-Path $ModuleBase -Leaf) -eq 'Integration') {
+    $ModuleBase = Split-Path $ModuleBase -Parent
+}
 
 # For tests in .\Unit subdirectory
 if ((Split-Path $ModuleBase -Leaf) -eq 'Unit') {
