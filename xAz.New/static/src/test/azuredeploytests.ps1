@@ -10,7 +10,7 @@ if ($path) {
     $armTemplate = $path
 }
 else {
-    $armTemplate = Get-xAzTemplate
+    $armTemplate = Get-<%= $PLASTER_PARAM_Prefix %>Template
 }
 
 Describe "test arm template $armTemplate" -Tag Unit {
