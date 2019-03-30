@@ -1,7 +1,5 @@
 # xAz.New
 
-[![Build Status](https://dev.azure.com/mwarneke/Test/_apis/build/status/PowerShellPlaster?branchName=master)](https://dev.azure.com/mwarneke/Test/_build/latest?definitionId=1&branchName=master)
-
 Framework for Azure Resource Manager Deployments based on ARM-Templates) Infrastructure as code. PowerShell Core.
 
 The module will create a PowerShell module in specified path.
