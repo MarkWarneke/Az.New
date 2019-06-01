@@ -81,9 +81,9 @@ for clean Build additionally [PSake](https://github.com/psake/psake)
 
 ## Code of Conduct
 
-This is a personal repository by [mark-mit-k](https://github.com/mark-mit-k). Microsoft is **NOT** maintaining this repository, we stick to the [code of conduct](https://microsoft.github.io/codeofconduct/)
+This is a personal repository by [markwarneke](https://github.com/markwarneke). Microsoft is **NOT** maintaining this repository, we stick to the [code of conduct](https://microsoft.github.io/codeofconduct/)
 
 ## Contact
 
-- twitter: [@mark_mit_k_](https://twitter.com/mark_mit_k_)
-- github: [mark-mit-k](https://github.com/mark-mit-k)
+- twitter: [@markwarneke](https://twitter.com/markwarneke)
+- github: [markwarneke](https://github.com/markwarneke)
