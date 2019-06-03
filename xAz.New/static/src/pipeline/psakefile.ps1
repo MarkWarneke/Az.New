@@ -231,11 +231,10 @@ Execute the build.ps1 to push a module with the desired version 2.0.0 to the mod
 
             $moduleRoot = Join-Path -Path $ProjectRoot -ChildPath $module
 
-            $moduleBase = $moduleRoot
+            $moduleBase = $ProjectRoot
             $moduleName = $module
 
             Write-Verbose "Module Root $moduleRoot"
-            Write-Verbose "Module Base $moduleBase"
             Write-Verbose "Module Name $moduleName"
 
             $feedurl = $feedurl -f $organization, $feedName
@@ -255,7 +254,7 @@ Execute the build.ps1 to push a module with the desired version 2.0.0 to the mod
 
             Update-ManifestExportedFunction  -moduleName $moduleName -moduleBase $moduleBase
 
-            Test-ModuleManifest -Path "$moduleBase\$moduleName.psd1" | Format-List
+            Test-ModuleManifest -Path (Join-Path $moduleBase "$moduleName.psd1") | Format-List
 
             Publish-NuGetModule -feedname $feedname -credential $credential -moduleName $moduleName -moduleBase $moduleBase
         }
@@ -502,7 +501,7 @@ Set the provided moduleVersion to the manifest of module aks in the folder 'c:\m
         [string] $moduleName
     )
 
-    $modulefile = "$moduleBase/$moduleName.psd1"
+    $modulefile = Join-Path $moduleBase "$moduleName.psd1"
     if ($PSCmdlet.ShouldProcess("Module manifest", "Update")) {
         Update-ModuleManifest -Path $modulefile -ModuleVersion $newVersion
     }
@@ -537,9 +536,9 @@ Add all public functions of module AKS to its manifest
         [string] $moduleName
     )
 
-    $publicFunctions = (Get-ChildItem -Path "$moduleBase\Public" -Filter '*.ps1').BaseName
+    $publicFunctions = (Get-ChildItem -Path (Join-Path $moduleBase "Public") -Filter '*.ps1').BaseName
 
-    $modulefile = "$moduleBase\$moduleName.psd1"
+    $modulefile = Join-Path $moduleBase "$moduleName.psd1"
     if ($PSCmdlet.ShouldProcess("Module manifest", "Update")) {
         Write-Verbose "Update Manifest $moduleFile"
         Update-ModuleManifest -Path $modulefile -FunctionsToExport $publicFunctions
