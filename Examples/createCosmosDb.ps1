@@ -63,7 +63,7 @@ $Module = New-xAzModule @Input
 $Module
 
 # Open file explorer
-Invoke-Item $Module.DestinationPath
+# Invoke-Item $Module.DestinationPath
 
 # Remove created module - Ask for confirmation
-Remove-Item -Path $Module.DestinationPath -Recurse -Force -Confirm
+# Remove-Item -Path $Module.DestinationPath -Recurse -Force -Confirm

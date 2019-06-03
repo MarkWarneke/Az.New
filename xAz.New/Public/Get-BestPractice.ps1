@@ -1,5 +1,5 @@
 
-function Get-BestPratice {
+function Get-BestPractice {
     [CmdletBinding()]
     param (
     )

@@ -23,7 +23,7 @@ function New-Deployment {
 
     .PARAMETER Location
     Name of Azure Location - e.g. WestEurope
-    [ValidateScript( { (Get-AzureRmLocation).Location -contains $_ } )]
+    [ValidateScript( { (Get-AzLocation).Location -contains $_ } )]
 
     .PARAMETER DeploymentParameter
     Inline parameter to pass to deployment
@@ -63,7 +63,7 @@ function New-Deployment {
             Position = 2,
             HelpMessage = "Enter name of Azure location - e.g. WestEurope"
         )]
-        [ValidateScript( { (Get-AzureRmLocation).Location -contains $_ } )]
+        [ValidateScript( { (Get-AzLocation).Location -contains $_ } )]
         [Alias("Loc")]
         [string] $Location,
 
@@ -81,7 +81,7 @@ function New-Deployment {
     process {
         Write-Verbose ("[$(Get-Date)] ResourceName {0}" -f $ResourceName)
 
-        $ResourceGroup = Get-AzureRmResourceGroup $ResourceGroupName -ErrorAction Stop
+        $ResourceGroup = Get-AzResourceGroup $ResourceGroupName -ErrorAction Stop
         Write-Verbose ("[$(Get-Date)] ResourceGroup {0}" -f $ResourceGroup.ResourceGroupName)
 
         $TemplateParameterObject = @{
@@ -92,10 +92,10 @@ function New-Deployment {
 
             if ($PSCmdlet.ShouldProcess($ResourceGroupName, $ResourceName)) {
                 if ( $DeploymentParameter ) {
-                    $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri @DeploymentParameter -ErrorVariable ErrorMessages
+                    $Deployment = New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri @DeploymentParameter -ErrorVariable ErrorMessages
                 }
                 else {
-                    $Deployment = New-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject -ErrorVariable ErrorMessages
+                    $Deployment = New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateUri $TemplateUri -TemplateParameterObject $TemplateParameterObject -ErrorVariable ErrorMessages
                 }
 
                 $return = Get-DeploymentOutput -Deployment $Deployment -ErrorMessage $ErrorMessages

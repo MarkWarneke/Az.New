@@ -46,7 +46,7 @@ Describe "test arm template $armTemplate" -Tag Unit {
     }
 
     it "should have metadata.json" {
-        $TemplateFolder | Where-Object Name -match 'metadata.json' | Should -be "metadata.json"
+        $TemplateFolder | Where-Object Name -match 'metadata.json' | Should -BeLike "*metadata.json"
     }
 
     it "should have parameters.json" {
