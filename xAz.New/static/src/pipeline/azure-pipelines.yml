@@ -7,6 +7,9 @@
 trigger:
 - master
 
+variables:
+  azureSubscription: "Mark"
+
 jobs:
   - job: Build_PS_Win2016
     pool:
@@ -16,9 +19,9 @@ jobs:
     - checkout: self
       persistCredentials: true
 
-    - task: AzurePowerShell@2
+    - task: AzurePowerShell@4
       inputs:
-        azureSubscription: "ARM Connection Christian MSDN"
+        azureSubscription: $(azureSubscription)
         scriptType: "FilePath"
         scriptPath: .\psake.ps1
         scriptArguments: -TaskList Test -Verbose
