@@ -9,6 +9,8 @@ trigger:
 
 variables:
   azureSubscription: "Mark"
+  feed.name: "az"
+  organization: "az-new"
 
 jobs:
   - job: Build_PS_Win2016
@@ -70,3 +72,17 @@ jobs:
       inputs:
         pathtoPublish: $(Build.ArtifactStagingDirectory)
         artifactName: MyBuildOutputs
+
+    - powershell: |
+        $param = @{
+          organization = "$(organization)"
+          feedName = "$(feed.name)"
+          systemAccessToken = "$(system.accesstoken)"
+          feedurl = "https://pkgs.dev.azure.com/{0}/_packaging/{1}/nuget/v2"
+          queueById = "$(Build.QueuedById)"
+        }
+        $(Build.SourcesDirectory)\psake.ps1 -TaskList Publish -parameters $param -Verbose
+      displayName: "Invoke Build"
+      env:
+        SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+      enabled: true
