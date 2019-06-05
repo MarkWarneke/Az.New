@@ -47,7 +47,7 @@ Import-Module (Join-Path -Path (Split-Path $PSScriptRoot -Parent) -ChildPath "xA
 # Specify parameters
 $input = @{
     ModuleName           = 'KeyVault'
-    ModuleDescription    = 'Function to deploy KeyVault'
+    Description          = 'Function to deploy KeyVault'
     Path                 = $Path
     DefaultCommandPrefix = "xAzKV"
     EMail                = "mark.warneke@gmail.com"

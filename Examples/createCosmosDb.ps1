@@ -48,7 +48,7 @@ Import-Module (Join-Path -Path (Split-Path $PSScriptRoot -Parent) -ChildPath "xA
 # Specify parameters
 $input = @{
     ModuleName           = 'Cosmos'
-    ModuleDescription    = 'Function to deploy Cosmos Db'
+    Description          = 'Function to deploy Cosmos Db'
     Path                 = $Path
     DefaultCommandPrefix = "xAzCosmos"
     EMail                = "mark.warneke@gmail.com"

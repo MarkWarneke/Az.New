@@ -459,12 +459,16 @@ Push the module AKS to the feed 'Release-Modules'
 
     try {
         Write-Verbose "Try pushing module $moduleName"
-        Publish-Module -Path "$moduleBase" -NuGetApiKey 'VSTS' -Repository $feedname -Credential $credential -Force -Verbose
+        Import-Module (Join-Path $moduleBase "$moduleName.psd1")
+
+        Get-Module -ListAvailable $moduleName
+        Publish-Module -Name $moduleName -NuGetApiKey 'VSTS' -Repository $feedname -Credential $credential -Force -Verbose
         Write-Verbose "Published module"
     }
     catch {
         Write-Verbose ("Unable to  upload module {0}" -f (Split-Path $PSScriptRoot -Leaf))
         $_.Exception | format-list -force
+        throw $_
     }
 }
 function Set-LocalVersion {

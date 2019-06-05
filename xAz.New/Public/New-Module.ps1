@@ -11,7 +11,7 @@ function New-Module {
     .PARAMETER ModuleName
     Name of the new PowerShell module
 
-    .PARAMETER ModuleDescription
+    .PARAMETER Description
     Description of the new PowerShell module
 
     .PARAMETER Path
@@ -44,7 +44,7 @@ function New-Module {
     Prompt user confirmation
 
     .EXAMPLE
-    New-xAzModule -ModuleName "KeyVault" -ModuleDescription "Azure Tool Module to deploy Azure KeyVault" -Path "C:/temp" -DefaultCommandPrefix "xAzKV" -Email "warneke.mark@gmail.com" -CompanyName "microsoft"
+    New-xAzModule -ModuleName "KeyVault" -Description "Azure Tool Module to deploy Azure KeyVault" -Path "C:/temp" -DefaultCommandPrefix "xAzKV" -Email "warneke.mark@gmail.com" -CompanyName "microsoft"
     ```
     Directory: C:\temp\xAz.KeyVault
 
@@ -78,7 +78,6 @@ function New-Module {
         [string] $Name,
 
         [Parameter(Mandatory, Position = 1)]
-        [Alias('ModuleDescription')]
         [string] $Description,
 
         [Parameter(Mandatory, Position = 2)]
@@ -110,6 +109,7 @@ function New-Module {
     $TemplatePath = Get-xAzPlasterManifest
     $NewModuleName = "{0}{1}" -f $Prefix, $Name
     $DestinationPath = (Join-Path $Path $NewModuleName)  # Must be named exactly like ModuleName for tests
+    New-Item -Directory $DestinationPath
 
     $plaster = @{
         AuthorName        = $Author
