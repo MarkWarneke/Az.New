@@ -1,6 +1,7 @@
 # xAz.New
 
-Framework for Azure Resource Manager Deployments based on ARM-Templates) Infrastructure as code. PowerShell Core.
+Framework for Azure Resource Manager Deployments based on ARM-Templates.
+Made for tested Infrastructure as Code Projects. Leveraging PowerShell Core.
 
 The module will create a PowerShell module in specified path.
 It can be used to deploy Azure Resource Manager Templates.
